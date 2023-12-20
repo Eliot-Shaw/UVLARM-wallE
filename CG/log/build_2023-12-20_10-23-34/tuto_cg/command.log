@@ -1,0 +1,2 @@
+Invoking command in '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/build/tuto_cg': /usr/bin/cmake /home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/tuto_cg -DCMAKE_INSTALL_PREFIX=/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/tuto_cg
+Invoked command in '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/build/tuto_cg' returned '1': /usr/bin/cmake /home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/tuto_cg -DCMAKE_INSTALL_PREFIX=/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/tuto_cg

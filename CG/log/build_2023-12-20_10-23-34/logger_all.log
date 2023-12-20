@@ -1,0 +1,94 @@
+[0.367s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'tuto_cg']
+[0.367s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=12, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['tuto_cg'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7fcb32940bb0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7fcb32a7d150>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7fcb32a7d150>>)
+[0.484s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.485s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.494s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.494s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.496s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.498s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.499s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.505s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.515s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.518s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.518s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.519s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.521s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.521s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.568s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.569s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.569s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.571s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.573s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.574s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.575s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.577s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.580s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.580s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.583s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.584s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.584s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.587s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.588s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extensions ['ignore', 'ignore_ament_install']
+[0.591s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extension 'ignore'
+[0.595s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extension 'ignore_ament_install'
+[0.597s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extensions ['colcon_pkg']
+[0.598s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extension 'colcon_pkg'
+[0.599s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extensions ['colcon_meta']
+[0.600s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extension 'colcon_meta'
+[0.601s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extensions ['ros']
+[0.608s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extension 'ros'
+[0.620s] DEBUG:colcon.colcon_core.package_identification:Found ROS schema reference in package manifest in 'tuto_cg'
+[0.620s] WARNING:colcon.colcon_core.package_identification:Failed to parse ROS package manifest in 'tuto_cg': Error(s) in package 'tuto_cg/package.xml':
+Invalid email "clarice.goulet@etu.imt-nord-europe.fr@todo.todo" for person "clarice.goulet@etu.imt-nord-europe.fr"
+[0.621s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extensions ['cmake', 'python']
+[0.623s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extension 'cmake'
+[0.632s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_cg) by extension 'python'
+[0.633s] DEBUG:colcon.colcon_core.package_identification:Package 'tuto_cg' with type 'cmake' and name 'tuto_cg'
+[0.635s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.635s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.637s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.637s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.638s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.682s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.682s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.700s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 1 installed packages in /home/imtld.local/clarice.goulet/ros_ws/install
+[0.702s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 340 installed packages in /opt/ros/iron
+[0.710s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.767s] Level 5:colcon.colcon_core.verb:set package 'tuto_cg' build argument 'cmake_args' from command line to 'None'
+[0.767s] Level 5:colcon.colcon_core.verb:set package 'tuto_cg' build argument 'cmake_target' from command line to 'None'
+[0.767s] Level 5:colcon.colcon_core.verb:set package 'tuto_cg' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.767s] Level 5:colcon.colcon_core.verb:set package 'tuto_cg' build argument 'cmake_clean_cache' from command line to 'False'
+[0.768s] Level 5:colcon.colcon_core.verb:set package 'tuto_cg' build argument 'cmake_clean_first' from command line to 'False'
+[0.780s] Level 5:colcon.colcon_core.verb:set package 'tuto_cg' build argument 'cmake_force_configure' from command line to 'False'
+[0.780s] Level 5:colcon.colcon_core.verb:set package 'tuto_cg' build argument 'ament_cmake_args' from command line to 'None'
+[0.780s] Level 5:colcon.colcon_core.verb:set package 'tuto_cg' build argument 'catkin_cmake_args' from command line to 'None'
+[0.803s] Level 5:colcon.colcon_core.verb:set package 'tuto_cg' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.803s] DEBUG:colcon.colcon_core.verb:Building package 'tuto_cg' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/build/tuto_cg', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/tuto_cg', 'merge_install': False, 'path': '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/tuto_cg', 'symlink_install': False, 'test_result_base': None}
+[0.817s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.849s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.854s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/tuto_cg'
+[0.873s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.874s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.874s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.977s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/build/tuto_cg': /usr/bin/cmake /home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/tuto_cg -DCMAKE_INSTALL_PREFIX=/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/tuto_cg
+[3.880s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/build/tuto_cg' returned '1': /usr/bin/cmake /home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/tuto_cg -DCMAKE_INSTALL_PREFIX=/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/tuto_cg
+[3.881s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[3.881s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[3.882s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[3.882s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[3.927s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[3.927s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[3.927s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[3.937s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[3.940s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/local_setup.ps1'
+[3.945s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/_local_setup_util_ps1.py'
+[3.952s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/setup.ps1'
+[3.963s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/local_setup.sh'
+[3.975s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/_local_setup_util_sh.py'
+[3.983s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/setup.sh'
+[4.000s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/local_setup.bash'
+[4.023s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/setup.bash'
+[4.035s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/local_setup.zsh'
+[4.044s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/CG/install/setup.zsh'
