@@ -23,4 +23,11 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+# pythonScripts
+install( PROGRAMS 
+  tutosim_launch
+  src/tuto_move
+  DESTINATION lib/tuto_kickoff)
+
+
 ament_package()
