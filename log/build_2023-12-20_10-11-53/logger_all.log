@@ -1,0 +1,127 @@
+[0.540s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.540s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=12, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f0b4d3f3e20>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f0b4dbf9ff0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f0b4dbf9ff0>>)
+[0.601s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.604s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.604s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.604s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.606s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.607s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.607s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE'
+[0.613s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.616s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.621s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.628s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.628s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.628s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.632s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.632s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.636s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.657s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.657s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.657s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.664s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.668s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.668s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.670s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.672s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.676s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.680s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.682s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.682s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.682s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.687s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_kickoff) by extensions ['ignore', 'ignore_ament_install']
+[0.687s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_kickoff) by extension 'ignore'
+[0.691s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_kickoff) by extension 'ignore_ament_install'
+[0.696s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_kickoff) by extensions ['colcon_pkg']
+[0.696s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_kickoff) by extension 'colcon_pkg'
+[0.700s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_kickoff) by extensions ['colcon_meta']
+[0.700s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_kickoff) by extension 'colcon_meta'
+[0.700s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_kickoff) by extensions ['ros']
+[0.701s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_kickoff) by extension 'ros'
+[0.712s] DEBUG:colcon.colcon_core.package_identification:Package 'tuto_kickoff' with type 'ros.ament_cmake' and name 'tuto_kickoff'
+[0.712s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.716s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.716s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.732s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.732s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.757s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.757s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.788s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 1 installed packages in /home/imtld.local/eliot.shaw/Bureau/LARM/ros_ws/install
+[0.789s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 340 installed packages in /opt/ros/iron
+[0.799s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.848s] Level 5:colcon.colcon_core.verb:set package 'tuto_kickoff' build argument 'cmake_args' from command line to 'None'
+[0.848s] Level 5:colcon.colcon_core.verb:set package 'tuto_kickoff' build argument 'cmake_target' from command line to 'None'
+[0.848s] Level 5:colcon.colcon_core.verb:set package 'tuto_kickoff' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.870s] Level 5:colcon.colcon_core.verb:set package 'tuto_kickoff' build argument 'cmake_clean_cache' from command line to 'False'
+[0.870s] Level 5:colcon.colcon_core.verb:set package 'tuto_kickoff' build argument 'cmake_clean_first' from command line to 'False'
+[0.870s] Level 5:colcon.colcon_core.verb:set package 'tuto_kickoff' build argument 'cmake_force_configure' from command line to 'False'
+[0.882s] Level 5:colcon.colcon_core.verb:set package 'tuto_kickoff' build argument 'ament_cmake_args' from command line to 'None'
+[0.889s] Level 5:colcon.colcon_core.verb:set package 'tuto_kickoff' build argument 'catkin_cmake_args' from command line to 'None'
+[0.894s] Level 5:colcon.colcon_core.verb:set package 'tuto_kickoff' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.896s] DEBUG:colcon.colcon_core.verb:Building package 'tuto_kickoff' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff', 'merge_install': False, 'path': '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/tuto_kickoff', 'symlink_install': False, 'test_result_base': None}
+[0.899s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.903s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.903s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/tuto_kickoff' with build type 'ament_cmake'
+[0.909s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/tuto_kickoff'
+[0.917s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.917s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.917s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.049s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/tuto_kickoff -DCMAKE_INSTALL_PREFIX=/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff
+[3.587s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/tuto_kickoff -DCMAKE_INSTALL_PREFIX=/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff
+[3.610s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff -- -j12 -l12
+[3.655s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff -- -j12 -l12
+[3.696s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff
+[4.225s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(tuto_kickoff)
+[4.225s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/build/tuto_kickoff
+[4.234s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff' for CMake module files
+[4.240s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff' for CMake config files
+[4.250s] Level 1:colcon.colcon_core.shell:create_environment_hook('tuto_kickoff', 'cmake_prefix_path')
+[4.251s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/hook/cmake_prefix_path.ps1'
+[4.271s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/hook/cmake_prefix_path.dsv'
+[4.297s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/hook/cmake_prefix_path.sh'
+[4.302s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/bin'
+[4.302s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/lib/pkgconfig/tuto_kickoff.pc'
+[4.315s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/lib/python3.10/site-packages'
+[4.315s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/bin'
+[4.317s] INFO:colcon.colcon_core.shell:Creating package script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.ps1'
+[4.336s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.dsv'
+[4.342s] INFO:colcon.colcon_core.shell:Creating package script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.sh'
+[4.362s] INFO:colcon.colcon_core.shell:Creating package script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.bash'
+[4.367s] INFO:colcon.colcon_core.shell:Creating package script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.zsh'
+[4.371s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/colcon-core/packages/tuto_kickoff)
+[4.397s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(tuto_kickoff)
+[4.399s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff' for CMake module files
+[4.401s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff' for CMake config files
+[4.408s] Level 1:colcon.colcon_core.shell:create_environment_hook('tuto_kickoff', 'cmake_prefix_path')
+[4.409s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/hook/cmake_prefix_path.ps1'
+[4.432s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/hook/cmake_prefix_path.dsv'
+[4.461s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/hook/cmake_prefix_path.sh'
+[4.466s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/bin'
+[4.466s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/lib/pkgconfig/tuto_kickoff.pc'
+[4.468s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/lib/python3.10/site-packages'
+[4.470s] Level 1:colcon.colcon_core.environment:checking '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/bin'
+[4.473s] INFO:colcon.colcon_core.shell:Creating package script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.ps1'
+[4.479s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.dsv'
+[4.483s] INFO:colcon.colcon_core.shell:Creating package script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.sh'
+[4.488s] INFO:colcon.colcon_core.shell:Creating package script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.bash'
+[4.493s] INFO:colcon.colcon_core.shell:Creating package script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/tuto_kickoff/package.zsh'
+[4.498s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/tuto_kickoff/share/colcon-core/packages/tuto_kickoff)
+[4.500s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[4.500s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[4.501s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[4.501s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[4.522s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[4.522s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[4.522s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[4.533s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[4.534s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/local_setup.ps1'
+[4.547s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/_local_setup_util_ps1.py'
+[4.558s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/setup.ps1'
+[4.566s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/local_setup.sh'
+[4.572s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/_local_setup_util_sh.py'
+[4.578s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/setup.sh'
+[4.586s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/local_setup.bash'
+[4.590s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/setup.bash'
+[4.597s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/local_setup.zsh'
+[4.602s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/imtld.local/eliot.shaw/Bureau/LARM/UVLARM-wallE/install/setup.zsh'
