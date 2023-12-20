@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import rclpy                  # core ROS2 client python librairie
 from rclpy.node import Node   # To manipulate ROS Nodes
 # Message to publish:
@@ -11,7 +12,7 @@ def main():
     myNode= Node('move_node') # Create a Node, with a name      
 
     #Initialize a publisher:
-    velocity_publisher = myNode.create_publisher(Twist, '/turtle1/cmd_vel', 10)   
+    velocity_publisher = myNode.create_publisher(Twist, '/multi/cmd_nav', 10)   
 
     # Start the ros infinit loop with myNode.
     while True :

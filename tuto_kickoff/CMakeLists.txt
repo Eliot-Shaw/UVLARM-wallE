@@ -25,8 +25,8 @@ endif()
 
 # pythonScripts
 install( PROGRAMS 
-  tutosim_launch
-  src/tuto_move
+  tutosim_launch.yaml
+  src/tuto_move.py
   DESTINATION lib/tuto_kickoff)
 
 
