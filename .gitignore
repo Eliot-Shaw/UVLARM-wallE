@@ -1,8 +1,8 @@
 devel/
 logs/
-log/
-build/
-install/
+*log/
+*build/
+*install/
 bin/
 lib/
 msg_gen/
