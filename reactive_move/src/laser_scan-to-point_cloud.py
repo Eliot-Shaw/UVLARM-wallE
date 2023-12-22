@@ -58,8 +58,3 @@ while True :
 scanInterpret.destroy_node()
 rclpy.shutdown()
 
-# activate main() function,
-# if the file is executed as a script (ie. not imported).
-if __name__ == '__main__':
-    # call main() function
-    main()
