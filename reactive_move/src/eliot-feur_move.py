@@ -23,11 +23,26 @@ class FonctionnementNormal:
         if pointPanik is None:
             print("panik IS NO MORE")
             print("tourner tout droit")
+            rclpy.spin_once( myNode, timeout_sec=0.1 )
+            velo = Twist()
+            velo.linear.x= 0.2  # meter per second
+            velo.angular.z= 0.0 # radian per second
+            velocity_publisher.publish(velo)
         else:
             if pointPanik[0]<0:
                 print("tourner à droite")
+                rclpy.spin_once( myNode, timeout_sec=0.1 )
+                velo = Twist()
+                velo.linear.x= 0.2  # meter per second
+                velo.angular.z= 0.2 # radian per second
+                velocity_publisher.publish(velo)
             else:
                 print("tourner à gauche")
+                clpy.spin_once( myNode, timeout_sec=0.1 )
+                velo = Twist()
+                velo.linear.x= 0.2  # meter per second
+                velo.angular.z= -0.2 # radian per second
+                velocity_publisher.publish(velo)
 
 
     def process(self):
