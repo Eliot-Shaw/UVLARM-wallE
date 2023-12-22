@@ -1,20 +1,47 @@
 #!/usr/bin/python3
-import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String
+import rclpy, math
+from sensor_msgs.msg import LaserScan, PointCloud2
+from sensor_msgs_py import point_cloud2
+from std_msgs.msg import Header
 
 
 class FonctionnementNormal:
-    def scan_callback(self, nuage):
-        if nuage == []:
-            ecrire que tout va bien
-        else :
-            tout va mal, bouger
+
+
+    #____________________________________________________________________________
+
+    def cloud_callback(self, nuage):
+        elisabethBornX = 0.75
+        elisabethBornY = 0.75
+        pointPanik = None
+        for pointNuage in nuage:
+            if - elisabethBornX < pointNuage[0] < elisabethBornX:
+                if - elisabethBornY < pointNuage[1] < elisabethBornY:
+                    pointPanik = pointNuage
+                    print("AHHHHHHHHHHHHHH")
+        if pointPanik is None:
+            print("panik IS NO MORE")
+            print("tourner tout droit")
+        else:
+            if pointPanik[0]<0:
+                print("tourner à droite")
+            else:
+                print("tourner à gauche")
+
 
     def process(self):
-        subscription topic scan
-        Nodepublisher pour avancer normalement
-        spin
+        rclpy.init(args=args)
+        self._node = Node()
+        self._node.create_subscription(LaserScan, 'cloud', self.cloud_callback, 10)
+        
+        ecrire topic tourne 
+
+        # Infinite loop:
+        rclpy.spin(minimal_subscriber)
+        # Clean stop:
+        minimal_subscriber.destroy_node()
+        rclpy.shutdown()
 
 
 
