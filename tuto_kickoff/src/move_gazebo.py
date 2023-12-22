@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import rclpy                  # core ROS2 client python librairie
 from rclpy.node import Node   # To manipulate ROS Nodes
 # Message to publish:
