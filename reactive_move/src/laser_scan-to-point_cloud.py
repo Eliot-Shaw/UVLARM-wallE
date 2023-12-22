@@ -6,13 +6,10 @@ from sensor_msgs_py import point_cloud2
 from std_msgs.msg import Header
 
 
-print("coucou")
 rosNode= None
 
 def scan_callback(scanMsg):
     global rosNode
-    print(scanMsg.header)
-    print(len(scanMsg.ranges))
     print("---------------------------------------------------------")
     #TROUVER COMMENT PUBLISH
     cloudpublisher.publish(pointcloud(scanMsg))
@@ -22,6 +19,7 @@ def scan_callback(scanMsg):
 def convert_msg(scanMsg):
     obstacles= []
     angle= scanMsg.angle_min
+    print(angle)
     for aDistance in scanMsg.ranges :
         if 0.1 < aDistance and aDistance < 5.0 :
             aPoint= [
@@ -40,11 +38,12 @@ def arrondir(obstacles):
 
 def pointcloud(scanMsg):
     pointlist = convert_msg(scanMsg)
-    print ("FEURFEURFEURFEUR")
-    print(arrondir(pointlist))
     pointcloud = point_cloud2.create_cloud_xyz32(Header(frame_id='frame'), pointlist)
+    compteur = 0
     for point in point_cloud2.read_points(pointcloud):
         print(point)
+        compteur += 1
+    print(f"Longueur totale : {compteur} ; sur scanMsg : {len(scanMsg.ranges)}")
     return pointcloud
 
 rclpy.init()
