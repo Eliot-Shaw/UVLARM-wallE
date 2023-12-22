@@ -1,32 +1,28 @@
-#!/usr/bin/python3
-import rclpy
+import rclpy, math
 from rclpy.node import Node
-from std_msgs.msg import String
+from sensor_msgs.msg import PointCloud2
+# Message to publish:
+from geometry_msgs.msg import Twist
 
 
-class MPContext:
+class CloudToDecision(Node):
 
-    def obstacle_callback(self, nuagePoints):
-        msg = String()
-        #IF POUR SI DROITE OU GAUCHE
-        msg.data = 'ALERTE COTE: %d (-1 à gauche, +1 à droite)' % self.i
-        self._node.publisher_.publish(msg)
-        self._node.get_logger().info('Publishing: "%s"' % msg.data)
-        self.i += 1
-
+    def decision_callback(self, scanner): 
+        self.publish(velo)
+        pass
+    
     def process(self):
-        rclpy.init(args=args)
-        self._node= Node()
-        # Create a publisher
-        self._publisher= self._node.create_publisher(String, 'topic', 10)
-        # Create a timer at 0.5 hertz, with a callback
-        self._timer = self._node.create_timer(0.5, self.timer_callback)
-        # Go
-        rclpy.spin(self._node)
-        # Clean stop
-        self._node.minimal_publisher.destroy_node()
+        rclpy.init()
+        #LA QUESTION EST POURQUOI LE _node 
+        self._node = Node('decider_direction')               
+        self._node.create_subscription(PointCloud2, 'cloud', self.decision_callback, 10)
+        self._node.create_publisher(Twist, '/cmd_vel', 10)
+        # Infinite loop:
+        rclpy.spin(self)
+        # Clean stop:
+        self.destroy_node()
         rclpy.shutdown()
 
-if __name__ == '__main__':
-    rosContext= MPContext()
-    rosContext.process()
+def main():
+    minimal_subscriber= CloudToDecision()
+    minimal_subscriber.process()
