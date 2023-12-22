@@ -23,10 +23,16 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+# Install launch files.
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
 # pythonScripts
 install( PROGRAMS 
-  tutosim_launch.yaml
   src/tuto_move.py
+  src/move_gazebo.py
   DESTINATION lib/tuto_kickoff)
 
 
