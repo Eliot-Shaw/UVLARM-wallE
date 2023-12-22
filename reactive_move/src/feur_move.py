@@ -7,16 +7,46 @@ from geometry_msgs.msg import Twist
 
 class CloudToDecision(Node):
 
-    def decision_callback(self, scanner): 
-        self.publish(velo)
-        pass
+    def cloud_callback(self, nuage): #fonction de décision
+        borneX = 0.75
+        borneY = 0.75
+        pointObstacle = None
+        for pointNuage in nuage:
+            if - borneX < pointNuage[0] < borneX:
+                if - borneY < pointNuage[1] < borneY:
+                    #comparer dist point obstacle avec point nuage
+                    if (pointObstacle is None) or (math.sqrt(pointObstacle[0]*pointObstacle[0]+pointObstacle[1]*pointObstacle[1])>math.sqrt(pointNuage[0]*pointNuage[0]+pointNuage[1]*pointNuage[1])):
+                        pass
+                    else: 
+                        pointObstacle = pointNuage
+                        print("AHHHHHHHHHHHHHH")
+        if pointObstacle is None:
+            print("panik IS NO MORE")
+            print("tourner tout droit")
+            velo = Twist()
+            velo.linear.x= 0.5  # meter per second
+            velo.angular.z= 0.0 # radian per second
+        else:
+            if pointObstacle[0]<0:
+                print("tourner à droite")
+                velo = Twist()
+                velo.linear.x= 0.0  # meter per second
+                velo.angular.z= 0.2 # radian per second
+            else:
+                print("tourner à gauche")
+                velo = Twist()
+                velo.linear.x= 0.2  # meter per second
+                velo.angular.z= -0.2 # radian per second
+
+        self.publisher_.publish(velo)
+        
     
     def process(self):
         rclpy.init()
         #LA QUESTION EST POURQUOI LE _node 
         self._node = Node('decider_direction')               
-        self._node.create_subscription(PointCloud2, 'cloud', self.decision_callback, 10)
-        self._node.create_publisher(Twist, '/cmd_vel', 10)
+        self._node.create_subscription(PointCloud2, 'cloud', self.cloud_callback, 10)
+        self.publisher_ = self._node.create_publisher(Twist, '/cmd_vel', 10)
         # Infinite loop:
         rclpy.spin(self)
         # Clean stop:
