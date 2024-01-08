@@ -16,10 +16,10 @@ launch:
   #  exec: "rqt"        
    # name: "rqt"
 
-#- executable:
+- executable:
 #    cmd: gnome-terminal --tab -e 'ros2 run teleop_twist_keyboard teleop_twist_keyboard'
 #    cmd: gnome-terminal --tab -e 'python3 /home/imtld.local/clarice.goulet/ros_ws/larm_ros/move_gazebo.py'
-#    cmd: gnome-terminal --tab -e 'ros2 run reactive_move laser_scan-to-point_cloud.py'
-#    cmd: gnome-terminal --tab -e 'ros2 run reactive_move feur_move.py'
+    cmd: gnome-terminal --tab -e 'ros2 run reactive_move laser_scan-to-point_cloud.py'
+    cmd: gnome-terminal --tab -e 'ros2 run reactive_move detect_obstacle.py'
 #    cmd: gnome-terminal --tab -e 'ros2 run tuto_kickoff move_gazebo.py'
 
