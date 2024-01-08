@@ -31,8 +31,8 @@ install(DIRECTORY
 
 # pythonScripts
 install( PROGRAMS 
-  src/feur_move.py
   src/laser_scan-to-point_cloud.py
+  src/feur_move_tbot.py
   DESTINATION lib/${PROJECT_NAME})
 
 
