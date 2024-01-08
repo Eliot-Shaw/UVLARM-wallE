@@ -10,30 +10,33 @@ from geometry_msgs.msg import Twist
 class CloudToDecision(Node):
 
     def cloud_callback(self, nuage): #fonction de décision
-        borneX = 0.75
-        borneY = 0.75
+        borneX = 0.15
+        borneY = 0.15
         pointObstacle = None
         for pointNuage in point_cloud2.read_points(nuage):
             if - borneX < pointNuage[0] < borneX:
-                if - borneY < pointNuage[1] < borneY:
+                if  0.1 < pointNuage[1] < borneY:
                     #comparer dist point obstacle avec point nuage
                     if (pointObstacle is None) or (math.sqrt(pointObstacle[0]*pointObstacle[0]+pointObstacle[1]*pointObstacle[1])>math.sqrt(pointNuage[0]*pointNuage[0]+pointNuage[1]*pointNuage[1])):
                         pointObstacle = pointNuage
                     
         if pointObstacle is None:
+            print("tourner tout droit")
             velo = Twist()
-            velo.linear.x= 1.5  # meter per second
+            velo.linear.x= 0.1  # meter per second
             velo.angular.z= 0.0 # radian per second
         else:
+            print(f"x est {pointObstacle[0]}")
+            print(f"y est {pointObstacle[1]}")
             if pointObstacle[0]<0:
                 print("tourner à droite")
                 velo = Twist()
-                velo.linear.x= 0.0  # meter per second
+                velo.linear.x= 0.05  # meter per second
                 velo.angular.z= 0.5 # radian per second
             else:
                 print("tourner à gauche")
                 velo = Twist()
-                velo.linear.x= 0.0  # meter per second
+                velo.linear.x= 0.05  # meter per second
                 velo.angular.z= -0.5 # radian per second
                 
         self.publisher_.publish(velo)
@@ -43,7 +46,7 @@ class CloudToDecision(Node):
         #rclpy.init()
         #LA QUESTION EST POURQUOI LE _node              
         self.create_subscription(PointCloud2, 'cloud', self.cloud_callback, 10)
-        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)  #/cmd_vel pour simu ; /multi/cmd_nav pour tbot
+        self.publisher_ = self.create_publisher(Twist, '/multi/cmd_nav', 10)  #/cmd_vel pour simu ; /multi/cmd_nav pour tbot
         rclpy.spin(self)
         self.destroy_node()
         rclpy.shutdown()
