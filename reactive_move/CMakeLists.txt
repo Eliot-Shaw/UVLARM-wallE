@@ -32,7 +32,8 @@ install(DIRECTORY
 # pythonScripts
 install( PROGRAMS 
   src/laser_scan-to-point_cloud.py
-  src/detect_obstacle.py
+  src/detect_obstacle_sim.py
+  src/detect_obstacle_bot.py
   DESTINATION lib/${PROJECT_NAME})
 
 

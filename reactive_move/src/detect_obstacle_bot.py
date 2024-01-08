@@ -10,22 +10,26 @@ from geometry_msgs.msg import Twist
 class CloudToDecision(Node):
 
     def cloud_callback(self, nuage): #fonction de décision
-        borneX = 0.75
-        borneY = 0.75
+        #bornes de détections absolues en mètres
+        borneX = 0.7 #devant le robot
+        borneY = 0.3
         pointObstacle = None
         for pointNuage in point_cloud2.read_points(nuage):
-            if - borneX < pointNuage[0] < borneX:
-                if - borneY < pointNuage[1] < borneY:
+            #si point est dans le carré
+            if -borneY < pointNuage[1] < borneY:
+                if 0 < pointNuage[0] < borneX:
+                    #on trouve le point de décision = point le + proche du robot
                     #comparer dist point obstacle avec point nuage
                     if (pointObstacle is None) or (math.sqrt(pointObstacle[0]*pointObstacle[0]+pointObstacle[1]*pointObstacle[1])>math.sqrt(pointNuage[0]*pointNuage[0]+pointNuage[1]*pointNuage[1])):
                         pointObstacle = pointNuage
                     
         if pointObstacle is None:
             velo = Twist()
-            velo.linear.x= 1.5  # meter per second
+            velo.linear.x= 1.0  # meter per second
             velo.angular.z= 0.0 # radian per second
         else:
-            if pointObstacle[0]<0:
+            print(f"x : {pointObstacle[0]} ; y: {pointObstacle[1]}")
+            if pointObstacle[1]<0:
                 print("tourner à droite")
                 velo = Twist()
                 velo.linear.x= 0.0  # meter per second
