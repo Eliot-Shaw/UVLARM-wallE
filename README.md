@@ -9,3 +9,4 @@ We are using the WallE machine.
 Trucs à faire:
 - Clean le mvt du robot 
 - Tester sur le vrai robot
+- Modifier les noms de prog dans reac_move

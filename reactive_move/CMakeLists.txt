@@ -32,7 +32,7 @@ install(DIRECTORY
 # pythonScripts
 install( PROGRAMS 
   src/laser_scan-to-point_cloud.py
-  src/feur_move_tbot.py
+  src/detect_obstacle.py
   DESTINATION lib/${PROJECT_NAME})
 
 
