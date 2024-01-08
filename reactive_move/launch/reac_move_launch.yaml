@@ -20,7 +20,7 @@ launch:
     cmd: gnome-terminal --tab -e 'ros2 run reactive_move laser_scan-to-point_cloud.py'
 
 - executable:
-    cmd: gnome-terminal --tab -e 'ros2 run reactive_move detect_obstacle_sim.py'
+    cmd: gnome-terminal --tab -e 'ros2 run reactive_move detect_obstacle_bot.py'
 #    cmd: gnome-terminal --tab -e 'ros2 run teleop_twist_keyboard teleop_twist_keyboard'
 #    cmd: gnome-terminal --tab -e 'ros2 launch tbot_node minimal_launch.yaml'
 

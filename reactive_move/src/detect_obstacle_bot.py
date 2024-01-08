@@ -26,19 +26,19 @@ class CloudToDecision(Node):
         if pointObstacle is None:
             print("tourner tout droit")
             velo = Twist()
-            velo.linear.x= 1.0  # meter per second
+            velo.linear.x= 0.5   # meter per second
             velo.angular.z= 0.0 # radian per second
         else:
             print(f"x : {pointObstacle[0]} ; y: {pointObstacle[1]}")
             if pointObstacle[1]<0:
                 print("tourner à droite")
                 velo = Twist()
-                velo.linear.x= 0.05  # meter per second
+                velo.linear.x= 0.0  # meter per second
                 velo.angular.z= 0.5 # radian per second
             else:
                 print("tourner à gauche")
                 velo = Twist()
-                velo.linear.x= 0.05  # meter per second
+                velo.linear.x= 0.0  # meter per second
                 velo.angular.z= -0.5 # radian per second
                 
         self.publisher_.publish(velo)
