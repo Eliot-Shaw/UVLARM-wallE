@@ -7,13 +7,13 @@ launch:
 
 # start a node in the XXX namespace
 #- node:
-#    pkg: "rqt"
-#    exec: "rqt"        
-#    name: "rqt"
+ #   pkg: "rqt"
+  #  exec: "rqt"        
+   # name: "rqt"
 
 - executable:
 #    cmd: gnome-terminal --tab -e 'ros2 run teleop_twist_keyboard teleop_twist_keyboard'
 #    cmd: gnome-terminal --tab -e 'python3 /home/imtld.local/clarice.goulet/ros_ws/larm_ros/move_gazebo.py'
-    cmd: gnome-terminal --tab -e 'python3 /home/bot/mb6-space/UVLARM-wallE/tuto_vision/src/presque_simple_camera.py' #camera
+    cmd: gnome-terminal --tab -e 'python3 /home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/tuto_vision/src/presque_simple_camera.py' #camera
 #    cmd: gnome-terminal --tab -e 'ros2 run tuto_kickoff tuto_move.py' #bot
 
