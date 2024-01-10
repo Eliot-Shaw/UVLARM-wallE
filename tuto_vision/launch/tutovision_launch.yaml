@@ -14,6 +14,6 @@ launch:
 - executable:
 #    cmd: gnome-terminal --tab -e 'ros2 run teleop_twist_keyboard teleop_twist_keyboard'
 #    cmd: gnome-terminal --tab -e 'python3 /home/imtld.local/clarice.goulet/ros_ws/larm_ros/move_gazebo.py'
-    cmd: gnome-terminal --tab -e 'python3 /home/imtld.local/clarice.goulet/ros_ws/UVLARM-wallE/tuto_vision/src/presque_simple_camera.py' #camera
+    cmd: gnome-terminal --tab -e 'ros2 run tuto_vision realsense_node.py' #camera
 #    cmd: gnome-terminal --tab -e 'ros2 run tuto_kickoff tuto_move.py' #bot
 

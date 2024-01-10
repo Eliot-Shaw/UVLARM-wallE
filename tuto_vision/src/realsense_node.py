@@ -1,7 +1,11 @@
+#!/usr/bin/env python3
+
 import pyrealsense2 as rs
 import signal, time, numpy as np
 import sys, cv2, rclpy
 from rclpy.node import Node
+
+isOk= True
 
 # Realsense Node:
 class Realsense(Node):
@@ -41,7 +45,6 @@ class Realsense(Node):
         pass
 
     # Capture ctrl-c event
-    isOk= True
     def signalInteruption(signum, frame):
         global isOk
         print( "\nCtrl-c pressed" )
@@ -49,7 +52,6 @@ class Realsense(Node):
     signal.signal(signal.SIGINT, signalInteruption)
 
     def process_img(self):
-        rclpy.init()
         rsNode= Realsense()
         rsNode.start_connexion()
         # Start streaming
@@ -77,6 +79,7 @@ class Realsense(Node):
         rclpy.shutdown()
     
 def main():
+    rclpy.init()
     minimal_subscriber= Realsense()
     minimal_subscriber.process_img()
 

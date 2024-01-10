@@ -32,7 +32,8 @@ install(DIRECTORY
 # pythonScripts
 install( PROGRAMS 
   src/presque_simple_camera.py
-  DESTINATION lib/tuto_kickoff)
+  src/realsense_node.py
+  DESTINATION lib/tuto_vision)
 
 
 ament_package()
