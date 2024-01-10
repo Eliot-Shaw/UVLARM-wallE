@@ -39,7 +39,24 @@ class Realsense(Node):
         self.config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, 60)
 
     def read_imgs(self):
-        pass
+        # Wait for a coherent tuple of frames: depth, color and accel
+        frames = self.pipeline.wait_for_frames()
+
+        color_frame = frames.first(rs.stream.color)
+        depth_frame = frames.first(rs.stream.depth)
+        
+        if not (depth_frame and color_frame):
+            pass
+
+        # Convert images to numpy arrays
+        depth_image = np.asanyarray(depth_frame.get_data())
+        color_image = np.asanyarray(color_frame.get_data())
+
+        # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
+        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
+
+        depth_colormap_dim = depth_colormap.shape
+        color_colormap_dim = color_image.shape
 
     def publish_imgs(self):
         pass
