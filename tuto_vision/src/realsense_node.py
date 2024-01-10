@@ -4,7 +4,6 @@ import pyrealsense2 as rs
 import signal, time, numpy as np
 import sys, cv2, rclpy
 from rclpy.node import Node
-import sensor_msgs.msg as msg, sensor_msgs_py
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 
@@ -72,8 +71,6 @@ class Realsense(Node):
         cv2.waitKey(1)
 
     def publish_imgs(self):
-        msg.header.stamp = self.get_clock().now().to_msg()
-
         self.bridge=CvBridge()
         msg_image = self.bridge.cv2_to_imgmsg(self.color_image,"bgr8")
         msg_image.header.stamp = self.get_clock().now().to_msg()
