@@ -58,6 +58,14 @@ class Realsense(Node):
         depth_colormap_dim = depth_colormap.shape
         color_colormap_dim = color_image.shape
 
+        sys.stdout.write( f"\r- {color_colormap_dim} - {depth_colormap_dim} - ({round(self.freq)} fps)" )
+        # Show images
+        images = np.hstack((color_image, depth_colormap))
+        # Show images
+        cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
+        cv2.imshow('RealSense', images)
+        cv2.waitKey(1)
+
     def publish_imgs(self):
         pass
 
@@ -74,7 +82,7 @@ class Realsense(Node):
         self.pipeline.start(self.config)
         count= 1
         refTime= time.process_time()
-        freq= 60
+        self.freq= 60
         sys.stdout.write("-")
         while isOk:
             self.read_imgs()
@@ -82,7 +90,7 @@ class Realsense(Node):
             # Frequency:
             if count == 10 :
                 newTime= time.process_time()
-                freq= 10/((newTime-refTime))
+                self.freq= 10/((newTime-refTime))
                 refTime= newTime
                 count= 0
             count+= 1
