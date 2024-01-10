@@ -4,8 +4,9 @@ import pyrealsense2 as rs
 import signal, time, numpy as np
 import sys, cv2, rclpy
 from rclpy.node import Node
-import sensor_msgs as msg, sensor_msgs_py
+import sensor_msgs.msg as msg, sensor_msgs_py
 from cv_bridge import CvBridge
+from sensor_msgs.msg import Image
 
 isOk= True
 
@@ -96,7 +97,7 @@ class Realsense(Node):
         refTime= time.process_time()
         self.freq= 60
         sys.stdout.write("-")
-        self.image_publisher = self.create_publisher(np.asanyarray, '/image_image', 10)
+        self.image_publisher = self.create_publisher(Image, '/image_image', 10)
         #self.image_publisher = self.create_publisher(np.asanyarray, '/image_image', 10)
         while isOk:
             self.read_imgs()
