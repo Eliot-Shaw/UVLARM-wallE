@@ -125,8 +125,8 @@ class Realsense(Node):
         sys.stdout.write("-")
         self.image_image_publisher = self.create_publisher(Image, '/image_image', 10)
         self.image_depth_publisher = self.create_publisher(Image, '/image_depth', 10)
-        self.infra_publisher_1 = self.create_publisher(Image, 'infrared_1',10) 
-        self.infra_publisher_2 = self.create_publisher(Image, 'infrared_2',10)
+        self.infra_publisher_1 = self.create_publisher(Image, '/infrared_1',10) 
+        self.infra_publisher_2 = self.create_publisher(Image, '/infrared_2',10)
         self.config.enable_stream(rs.stream.infrared, 1, 848, 480, rs.format.y8, 60)
 
         while isOk:
