@@ -11,3 +11,7 @@ Trucs à faire:
 - Tester sur le vrai robot
 - Modifier les noms de prog dans reac_move
 - Remplir le readme avec le tuto d'installation et description plus détaillée
+
+
+
+ETAPE SUIVANTE : VISION
