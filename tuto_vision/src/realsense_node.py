@@ -4,6 +4,8 @@ import pyrealsense2 as rs
 import signal, time, numpy as np
 import sys, cv2, rclpy
 from rclpy.node import Node
+import sensor_msgs as msg, sensor_msgs_py
+from cv_bridge import CvBridge
 
 isOk= True
 
@@ -14,6 +16,7 @@ class Realsense(Node):
 
         self.pipeline = rs.pipeline()
         self.config = rs.config()
+
 
     def start_connexion(self):
         # Configure depth and color streams
@@ -38,6 +41,7 @@ class Realsense(Node):
         self.config.enable_stream(rs.stream.color, 848, 480, rs.format.bgr8, 60)
         self.config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, 60)
 
+
     def read_imgs(self):
         # Wait for a coherent tuple of frames: depth, color and accel
         frames = self.pipeline.wait_for_frames()
@@ -49,25 +53,32 @@ class Realsense(Node):
             pass
 
         # Convert images to numpy arrays
-        depth_image = np.asanyarray(depth_frame.get_data())
-        color_image = np.asanyarray(color_frame.get_data())
+        self.depth_image = np.asanyarray(depth_frame.get_data())
+        self.color_image = np.asanyarray(color_frame.get_data())
 
         # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
-        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
+        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(self.depth_image, alpha=0.03), cv2.COLORMAP_JET)
 
         depth_colormap_dim = depth_colormap.shape
-        color_colormap_dim = color_image.shape
+        color_colormap_dim = self.color_image.shape
 
         sys.stdout.write( f"\r- {color_colormap_dim} - {depth_colormap_dim} - ({round(self.freq)} fps)" )
         # Show images
-        images = np.hstack((color_image, depth_colormap))
+        images = np.hstack((self.color_image, depth_colormap))
         # Show images
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
         cv2.imshow('RealSense', images)
         cv2.waitKey(1)
 
     def publish_imgs(self):
-        pass
+        msg.header.stamp = self.get_clock().now().to_msg()
+
+        self.bridge=CvBridge()
+        msg_image = self.bridge.cv2_to_imgmsg(self.color_image,"bgr8")
+        msg_image.header.stamp = self.get_clock().now().to_msg()
+        msg_image.header.frame_id = "image"
+        self.image_publisher.publish(msg_image)
+
 
     # Capture ctrl-c event
     def signalInteruption(signum, frame):
@@ -75,6 +86,7 @@ class Realsense(Node):
         print( "\nCtrl-c pressed" )
         isOk= False
     signal.signal(signal.SIGINT, signalInteruption)
+
 
     def process_img(self):
         self.start_connexion()
@@ -84,6 +96,8 @@ class Realsense(Node):
         refTime= time.process_time()
         self.freq= 60
         sys.stdout.write("-")
+        self.image_publisher = self.create_publisher(np.asanyarray, '/image_image', 10)
+        #self.image_publisher = self.create_publisher(np.asanyarray, '/image_image', 10)
         while isOk:
             self.read_imgs()
             self.publish_imgs()
