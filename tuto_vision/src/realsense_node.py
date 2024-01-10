@@ -69,8 +69,7 @@ class Realsense(Node):
     signal.signal(signal.SIGINT, signalInteruption)
 
     def process_img(self):
-        rsNode= Realsense()
-        rsNode.start_connexion()
+        self.start_connexion()
         # Start streaming
         self.pipeline.start(self.config)
         count= 1
@@ -78,8 +77,8 @@ class Realsense(Node):
         freq= 60
         sys.stdout.write("-")
         while isOk:
-            rsNode.read_imgs()
-            rsNode.publish_imgs()
+            self.read_imgs()
+            self.publish_imgs()
             # Frequency:
             if count == 10 :
                 newTime= time.process_time()
@@ -87,12 +86,12 @@ class Realsense(Node):
                 refTime= newTime
                 count= 0
             count+= 1
-            rclpy.spin_once(rsNode, timeout_sec=0.001)
+            rclpy.spin_once(self, timeout_sec=0.001)
         # Stop streaming
         print("Ending...")
-        rsNode.pipeline.stop()
+        self.pipeline.stop()
         # Clean end
-        rsNode.destroy_node()
+        self.destroy_node()
         rclpy.shutdown()
     
 def main():
