@@ -4,30 +4,8 @@ import numpy as np
 import cv2
 import numpy as np
 
-def souris(event, x, y, flags, param):
-    global lo, hi, color, hsv_px
 
-    if event == cv2.EVENT_MOUSEMOVE:
-        # Conversion des trois couleurs RGB sous la souris en HSV
-        px = frame[y,x]
-        px_array = np.uint8([[px]])
-        hsv_px = cv2.cvtColor(px_array,cv2.COLOR_BGR2HSV)
-
-    if event==cv2.EVENT_MBUTTONDBLCLK:
-        color=image[y, x][0]
-
-    if event==cv2.EVENT_LBUTTONDOWN:
-        if color>5:
-            color-=1
-
-    if event==cv2.EVENT_RBUTTONDOWN:
-        if color<250:
-            color+=1
-
-    lo[0]=color-10
-    hi[0]=color+10
-
-color=60
+color=60 # HSV : detecter H = 60 (vert vert)
 
 lo=np.array([color-5, 100, 50])
 hi=np.array([color+5, 255,255])
