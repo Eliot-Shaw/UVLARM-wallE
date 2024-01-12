@@ -8,9 +8,13 @@ from rclpy.node import Node
 from sensor_msgs.msg import PointCloud2
 from sensor_msgs_py import point_cloud2
 from geometry_msgs.msg import Twist
+import time, random
 
 
 class CloudToDecision(Node):
+    def __init__(self):
+        super.__init__('decider_direction')
+        self.ordre_date_executive = None
 
     def cloud_callback(self, nuage): #fonction de décision
         #bornes de détections absolues en mètres
@@ -25,7 +29,7 @@ class CloudToDecision(Node):
                     #comparer dist point obstacle avec point nuage
                     if (pointObstacle is None) or (math.sqrt(pointObstacle[0]*pointObstacle[0]+pointObstacle[1]*pointObstacle[1])>math.sqrt(pointNuage[0]*pointNuage[0]+pointNuage[1]*pointNuage[1])):
                         pointObstacle = pointNuage
-                    
+
         if pointObstacle is None:
             print("tourner tout droit")
             velo = Twist()
@@ -33,17 +37,20 @@ class CloudToDecision(Node):
             velo.angular.z= 0.0 # radian per second
         else:
             print(f"x : {pointObstacle[0]} ; y: {pointObstacle[1]}")
-            if pointObstacle[1]<0:
-                print("tourner à droite")
+            self.reactObstacle(pointObstacle)
+
+    def reactObstacle(self, pointObstacle):
+        if ordre_date_executive is None :
+            ordre_date_executive=time.time()+(0,5+random.random()*1,5)
+        else:
+            if time.time() < ordre_date_executive:
+                print("tourner tout droit")
                 velo = Twist()
-                velo.linear.x= 0.0  # meter per second
+                velo.linear.x= 0.0   # meter per second
                 velo.angular.z= 0.5 # radian per second
             else:
-                print("tourner à gauche")
-                velo = Twist()
-                velo.linear.x= 0.0  # meter per second
-                velo.angular.z= -0.5 # radian per second
-                
+                ordre_date_executive = None
+
         self.publisher_.publish(velo)
         
     
@@ -58,7 +65,7 @@ class CloudToDecision(Node):
 
 def main():
     rclpy.init()
-    minimal_subscriber= CloudToDecision('decider_direction')
+    minimal_subscriber= CloudToDecision()
     minimal_subscriber.process()
 
 if __name__ == '__main__':
