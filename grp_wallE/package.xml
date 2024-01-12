@@ -4,7 +4,7 @@
   <name>grp_wallE</name>
   <version>0.0.0</version>
   <description>Take a look at our README file</description>
-  <maintainer email="eliot.shaw@etu.imt-nord-europe.fr">bot</maintainer>
+  <maintainer email="mobisyst@imt-nord-europe.fr">bot</maintainer>
   <license>NOLICENCE</license>
 
   <depend>rclcpp</depend>
