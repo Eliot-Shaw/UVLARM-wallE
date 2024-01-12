@@ -13,5 +13,3 @@ Trucs à faire:
 - Remplir le readme avec le tuto d'installation et description plus détaillée
 
 
-
-ETAPE SUIVANTE : VISION
