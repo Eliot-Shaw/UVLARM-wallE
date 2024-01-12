@@ -33,8 +33,8 @@ install(DIRECTORY
 install( PROGRAMS 
   src/camera_node.py
   src/laser_scan-point_cloud.py
-  src/navigation_node
-  src/seuillage_node
+  src/navigation_node.py
+  src/seuillage_node.py
   DESTINATION lib/${PROJECT_NAME})
 ########################################################################################################################################################
 

@@ -1,6 +1,7 @@
+#!/usr/bin/python3
+
 # This file gets laser streams topic in and publishes in /nuage topic
 
-#!/usr/bin/python3
 import rclpy, math
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan, PointCloud2

@@ -1,4 +1,4 @@
 launch tbot feedback
 
 rviz2
-topic echo /bouteille
+ros2 topic echo /bouteille

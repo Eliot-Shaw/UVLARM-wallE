@@ -1,7 +1,6 @@
-# This file subscribes to /nuage topic in and publishes in /multi/cmd_vel topic
-
-
 #!/usr/bin/python3
+
+# This file subscribes to /nuage topic in and publishes in /multi/cmd_vel topic
 
 import rclpy, math
 from rclpy.node import Node
@@ -13,12 +12,12 @@ import time, random
 
 class CloudToDecision(Node):
     def __init__(self):
-        super.__init__('decider_direction')
+        super().__init__('decider_direction')
         self.ordre_date_executive = None
 
     def cloud_callback(self, nuage): #fonction de décision
         #bornes de détections absolues en mètres
-        borneX = 0.7 #devant le robot
+        borneX = 0.6 #devant le robot
         borneY = 0.3
         pointObstacle = None
         for pointNuage in point_cloud2.read_points(nuage):
@@ -33,25 +32,30 @@ class CloudToDecision(Node):
         if pointObstacle is None:
             print("tourner tout droit")
             velo = Twist()
-            velo.linear.x= 0.5   # meter per second
+            velo.linear.x= 0.3   # meter per second
             velo.angular.z= 0.0 # radian per second
+            self.publisher_.publish(velo)
         else:
-            print(f"x : {pointObstacle[0]} ; y: {pointObstacle[1]}")
-            self.reactObstacle(pointObstacle)
-
-    def reactObstacle(self, pointObstacle):
-        if ordre_date_executive is None :
-            ordre_date_executive=time.time()+(0,5+random.random()*1,5)
-        else:
-            if time.time() < ordre_date_executive:
-                print("tourner tout droit")
+            if pointObstacle[0] < 0.2:
+                print(f"x : {pointObstacle[0]} ; y: {pointObstacle[1]}")
+                print("tourner.")
                 velo = Twist()
                 velo.linear.x= 0.0   # meter per second
                 velo.angular.z= 0.5 # radian per second
+                self.publisher_.publish(velo)
             else:
-                ordre_date_executive = None
-
-        self.publisher_.publish(velo)
+                if pointObstacle[1]<0:
+                    print("tourner à droite")
+                    velo = Twist()
+                    velo.linear.x= 0.3  # meter per second
+                    velo.angular.z= 1.5 # radian per second
+                    self.publisher_.publish(velo)
+                else:
+                    print("tourner à gauche")
+                    velo = Twist()
+                    velo.linear.x= 0.3   # meter per second
+                    velo.angular.z= -1.5 # radian per second
+            
         
     
     def process(self):
