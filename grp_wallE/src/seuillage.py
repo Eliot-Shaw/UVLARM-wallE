@@ -26,7 +26,6 @@ def souris(event, x, y, flags, param):
     lo[0]=color-10
     hi[0]=color+10
 
-
 color=60 # HSV : detecter H = 60 (vert vert)
 
 lo=np.array([color-5, 100, 50])
