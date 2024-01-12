@@ -1,3 +1,6 @@
+# This file subscribes to /nuage topic in and publishes in /multi/cmd_vel topic
+
+
 #!/usr/bin/python3
 
 import rclpy, math

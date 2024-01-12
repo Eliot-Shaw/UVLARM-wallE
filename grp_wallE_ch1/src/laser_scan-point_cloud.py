@@ -1,3 +1,5 @@
+# This file gets laser streams topic in and publishes in /nuage topic
+
 #!/usr/bin/python3
 import rclpy, math
 from rclpy.node import Node
