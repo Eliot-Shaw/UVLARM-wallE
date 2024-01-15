@@ -19,3 +19,5 @@ You should have:
 
         export ROS_AUTOMATIC_DISCOVERY_RANGE=SUBNET
         export ROS_DOMAIN_ID=03
+
+The rivz2 config file is available in the /config directory
