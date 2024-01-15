@@ -1,4 +1,17 @@
-launch tbot feedback
+#gnome-terminal 'export ROS_AUTOMATIC_DISCOVERY_RANGE=SUBNET'
+#gnome-terminal 'export ROS_DOMAIN_ID=03'
+#gnome-terminal 'export ROS_LOCALHOST_ONLY=0'
 
-rviz2
-ros2 topic echo /bouteille
+launch:
+
+- executable:
+    cmd: gnome-terminal --tab -e 'rviz2'
+
+- executable:
+    cmd: gnome-terminal --tab -e 'ros2 topic echo /bouteille'
+
+- executable:
+    cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch1 camera_node.py'
+
+- executable:
+    cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch1 seuillage_node.py'
