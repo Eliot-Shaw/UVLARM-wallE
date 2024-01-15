@@ -35,8 +35,8 @@ class Seuillage(Node):
             if self.color<250:
                 self.color+=1
 
-        self.lo[0]=self.color-15
-        self.hi[0]=self.color+15
+        self.lo[0]=self.color-20
+        self.hi[0]=self.color+20
 
     def seuillage(self, cap):
         self.bridge = CvBridge()
@@ -90,8 +90,8 @@ class Seuillage(Node):
 
         self.color=70 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
-        self.lo=np.array([self.color-5, 100, 50])
-        self.hi=np.array([self.color+5, 255,255])
+        self.lo=np.array([self.color-20, 100, 50])
+        self.hi=np.array([self.color+20, 255,255])
 
         self.color_info=(0, 0, 255)
 
