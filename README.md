@@ -6,10 +6,9 @@ We are using the WallE machine.
 
 ## Installation
 
-go to https://github.com/Eliot-Shaw/UVLARM-wallE.git
-clone the repository on your machine
+Go to https://github.com/Eliot-Shaw/UVLARM-wallE.git and clone the repository on your machine
 
-run the command in your ros workspace : `colcon build`
+You need to build your ros workspace with the command : `colcon build`
 
 For challenge n°1, you can run the program with the following command: `ros2 launch grp_wallE_ch1 tbot_launch.yaml`
 The data streamed in the topics are also accessible by another computer on the same domain ID by running the command: `ros2 launch grp_wallE_ch1 visualize_launch.yaml`
