@@ -9,7 +9,6 @@ from sensor_msgs.msg import Image
 from std_msgs.msg import String
 
 message = String()
-message.data = "Bouteille trouvée!"
 
 # Node Seuillage couleur verte:
 class Seuillage(Node):
@@ -72,6 +71,7 @@ class Seuillage(Node):
                 cv2.circle(self.frame, (int(x), int(y)), 5, self.color_info, 10)
                 cv2.line(self.frame, (int(x), int(y)), (int(x)+150, int(y)), self.color_info, 2)
                 cv2.putText(self.frame, "Bouteille !!!", (int(x)+10, int(y) -10), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
+                message.data = f"Bouteille trouvée !!! ----- {time.time()}"
                 self.publisher_bouteille.publish(message)
 
         cv2.imshow('Camera', self.frame)

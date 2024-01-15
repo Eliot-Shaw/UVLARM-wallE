@@ -17,7 +17,7 @@ class CloudToDecision(Node):
 
     def cloud_callback(self, nuage): #fonction de décision
         #bornes de détections absolues en mètres
-        borneX = 0.6 #devant le robot
+        borneX = 0.7 #devant le robot
         borneY = 0.3
         pointObstacle = None
         for pointNuage in point_cloud2.read_points(nuage):
@@ -36,7 +36,7 @@ class CloudToDecision(Node):
             velo.angular.z= 0.0 # radian per second
             self.publisher_.publish(velo)
         else:
-            if pointObstacle[0] < 0.2:
+            if pointObstacle[0] < 0.3:
                 print(f"x : {pointObstacle[0]} ; y: {pointObstacle[1]}")
                 print("tourner.")
                 velo = Twist()

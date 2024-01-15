@@ -44,7 +44,6 @@ class Realsense(Node):
         self.config.enable_stream(rs.stream.infrared, 1, 848, 480, rs.format.y8, 60)
         self.config.enable_stream(rs.stream.infrared, 2, 848, 480, rs.format.y8, 60)
 
-
     def read_imgs(self):
         # Wait for a coherent tuple of frames: depth, color and accel
         frames = self.pipeline.wait_for_frames()
