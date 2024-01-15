@@ -21,3 +21,16 @@ You should have:
         export ROS_DOMAIN_ID=03
 
 The rivz2 config file is available in the /config directory
+
+
+todo :
+- affiner detection bouteille :
+        - hsv
+        - forme
+
+- Map en node
+- Img depth en node (recupere centre zone verte et retourne la distance de ce pixel)
+
+- Orientation robot par rapport à map en node
+- Placage bouteille par rapport à bot (recupere distance bouteille, angle par rapp map et map et retourne coordonéesrdonées bouteilles carte)
+
