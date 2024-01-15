@@ -1,10 +1,25 @@
-Projet LARM - Logiciel et Architecture pour la Robotique Mobile - Groupe 3
-==================
+# Projet LARM - Logiciel et Architecture pour la Robotique Mobile - Groupe 3
 
 Hello !
 
 This is the shared repository of group 3 (Eliot Shaw & Clarice Goulet) for the challenges and the end project of the UV LARM.
 We are using the WallE machine. 
+
+
+## Installation
+
+
+go to https://github.com/Eliot-Shaw/UVLARM-wallE.git
+clone the repository on your machine
+
+run the command in your ros workspace : colcon build
+then, you can run the program:
+ros2 launch grp_wallE_ch1 visualize_launch.yaml
+
+You should have:
+
+
+
 
 Trucs à faire:
 - Clean le mvt du robot 
