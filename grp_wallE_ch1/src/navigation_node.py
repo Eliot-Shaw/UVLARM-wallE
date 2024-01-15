@@ -18,7 +18,7 @@ class CloudToDecision(Node):
     def cloud_callback(self, nuage): #fonction de décision
         #bornes de détections absolues en mètres
         borneX = 0.7 #devant le robot
-        borneY = 0.3
+        borneY = 0.28
         pointObstacle = None
         for pointNuage in point_cloud2.read_points(nuage):
             #si point est dans le carré
