@@ -55,6 +55,8 @@ class CloudToDecision(Node):
                     velo = Twist()
                     velo.linear.x= 0.3   # meter per second
                     velo.angular.z= -1.5 # radian per second
+                    self.publisher_.publish(velo)
+
             
         
     
