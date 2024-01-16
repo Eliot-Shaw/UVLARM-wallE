@@ -52,10 +52,6 @@ try:
         # Get the intrinsic parameters
         color_intrin = aligned_color_frame.profile.as_video_stream_profile().intrinsics
 
-        color_image = np.asanyarray(aligned_color_frame.get_data())
-
-        depth_colormap_dim = depth_colormap.shape
-        color_colormap_dim = color_image.shape
 
         #Use pixel value of  depth-aligned color image to get 3D axes
         x, y = int(color_colormap_dim[1]/2), int(color_colormap_dim[0]/2)
