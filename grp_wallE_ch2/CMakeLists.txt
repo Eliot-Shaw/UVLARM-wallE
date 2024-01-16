@@ -31,9 +31,9 @@ install(DIRECTORY
 ########################################################################################################################################################
 # pythonScripts
 install( PROGRAMS 
-  camera_node.py
-  depth_node.py
-  seuillage_node.py
+  src/camera_node.py
+  src/depth_node.py
+  src/seuillage_node.py
   DESTINATION lib/${PROJECT_NAME})
 ########################################################################################################################################################
 
