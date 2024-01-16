@@ -24,7 +24,7 @@ The rivz2 config file is available in the /config directory
 
 
 todo :
-- dégager souris
+- dégager souris : FAIT, laissé pour afficher valeur HSV du pixel
 - affiner detection bouteille :
         - hsv
         - forme
@@ -33,5 +33,5 @@ todo :
 - Img depth en node (recupere centre zone verte et retourne la distance de ce pixel)
 
 - Orientation robot par rapport à map en node
-- Placage bouteille par rapport à bot (recupere distance bouteille, angle par rapp map et map et retourne coordonéesrdonées bouteilles carte)
+- Placage bouteille par rapport à bot (recupere distance bouteille, angle par rapp map et map et retourne coordonnées bouteilles carte)
 
