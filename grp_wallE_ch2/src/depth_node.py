@@ -31,7 +31,7 @@ class Profondeur(Node):
         self.create_subscription(Image, '/coords_img_bouteille', self.profondeur, 10) 
         self.publisher_distance_bouteille = self.create_publisher(Float32, '/distance_bouteille', 10)
         message.data = 0.0
-        self.publisher_distance_bouteille.publish(message.data)
+        self.publisher_distance_bouteille.publish(message)
         print("subscribe&publish ok")
 
         while True: 
