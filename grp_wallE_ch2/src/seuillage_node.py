@@ -62,7 +62,8 @@ class Seuillage(Node):
                 # publish to topic
                 message.x = x
                 message.y = y
-                message.z = 0
+                message.z = 0.0
+                print(f" message {message.x}, {message.y}, {0}")
                 self.publisher_coords_img_bouteille.publish(message)
                 print("finito")
 
