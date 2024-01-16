@@ -64,6 +64,8 @@ class Seuillage(Node):
                 message.y = y
                 message.z = 0
                 self.publisher_coords_img_bouteille.publish(message)
+                print("finito")
+
 
         cv2.imshow('Camera', self.frame)
         cv2.imshow('image2', self.image2)
