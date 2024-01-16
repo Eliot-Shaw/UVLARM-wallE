@@ -143,6 +143,7 @@ class Realsense(Node):
         rclpy.shutdown()
     
 def main():
+    print("camera")
     rclpy.init()
     minimal_subscriber= Realsense()
     minimal_subscriber.process_img()

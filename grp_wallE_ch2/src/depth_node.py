@@ -41,6 +41,7 @@ class Profondeur(Node):
 
 
 def main():
+    print("depth")
     rclpy.init()
     minimal_subscriber= Profondeur()
     print("initialisation : ok")
