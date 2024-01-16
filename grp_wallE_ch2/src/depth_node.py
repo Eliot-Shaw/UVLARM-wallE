@@ -19,6 +19,7 @@ class Profondeur(Node):
         self.cv2_image_depth = bridge.imgmsg_to_cv2(img_msg=image_depth_sub, desired_encoding='passthrough')
 
     def profondeur(self, coords_sub):
+        print(f"entrer profondeur")
         message.data = self.cv2_image_depth.get_distance(coords_sub.x, coords_sub.y)
         self.publisher_distance_bouteille.publish(message.data)
         print(f"coo ok ------------ {message}")

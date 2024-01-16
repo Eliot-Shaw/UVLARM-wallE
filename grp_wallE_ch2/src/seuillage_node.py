@@ -25,12 +25,7 @@ class Seuillage(Node):
 
     def seuillage(self, cap):
         self.bridge = CvBridge()
-        print("on est dans seuillage")
-        print(type(cap))
-        image_cv2 = self.bridge.imgmsg_to_cv2(img_msg=cap, desired_encoding='passthrough')
-        print(type(image_cv2))
-        self.frame=image_cv2
-        print("le frame ok")
+        self.frame = self.bridge.imgmsg_to_cv2(img_msg=cap, desired_encoding='passthrough')
         self.image=cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
         mask=cv2.inRange(self.image, self.lo, self.hi)
         # Flouttage de l'image
