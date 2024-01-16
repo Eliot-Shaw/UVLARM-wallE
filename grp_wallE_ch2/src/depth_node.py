@@ -19,7 +19,7 @@ class Profondeur(Node):
     def lastImg (self, image_depth_sub): 
         #bridge = CvBridge()
         #self.cv2_image_depth = bridge.imgmsg_to_cv2(img_msg=image_depth_sub, desired_encoding='passthrough')
-        self.cv2_image_depth = image_depth_sub
+        self.cv2_image_depth = np.asanyarray(image_depth_sub.get_data())
 #pas convertir en CV2 mais convertir en pyrelasense2
 
 
