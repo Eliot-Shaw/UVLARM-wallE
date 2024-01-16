@@ -97,6 +97,7 @@ class Seuillage(Node):
 
 
 def main():
+    print("seuillage")
     rclpy.init()
     minimal_subscriber= Seuillage()
     print("initialisation : ok")
