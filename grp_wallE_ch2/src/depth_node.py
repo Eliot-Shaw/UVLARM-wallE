@@ -30,6 +30,7 @@ class Profondeur(Node):
         self.create_subscription(Image, '/image_depth', self.lastImg, 10) 
         self.create_subscription(Image, '/coords_img_bouteille', self.profondeur, 10) 
         self.publisher_distance_bouteille = self.create_publisher(Float32, '/distance_bouteille', 10)
+        self.publisher_distance_bouteille.publish(0.0)
         print("subscribe&publish ok")
 
         while True: 
