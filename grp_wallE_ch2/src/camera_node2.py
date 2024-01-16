@@ -99,9 +99,10 @@ class Realsense(Node):
 
 
     def calcul_distance_bouteille(self, coords_bouteille):
+
         dist = Float32()
         print("getting the dist")
-        dist.data = self.depth_frame.as_depth_frame().get_distance(coords_bouteille.x, coords_bouteille.y) ####pb ici
+        dist.data = self.depth_frame.as_depth_frame().get_distance(int(coords_bouteille.x), int(coords_bouteille.y)) ####pb ici
         print(f"dist : {dist}")
         self.publisher_distance_bouteille.publish(dist)
         
