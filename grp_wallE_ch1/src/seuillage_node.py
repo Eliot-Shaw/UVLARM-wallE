@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import pyrealsense2 as rs
-import signal, time, numpy as np
-import sys, cv2, rclpy
+import time, numpy as np
+import cv2, rclpy
 from rclpy.node import Node
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
@@ -24,28 +24,12 @@ class Seuillage(Node):
             px_array = np.uint8([[px]])
             self.hsv_px = cv2.cvtColor(px_array,cv2.COLOR_BGR2HSV)
 
-        if event==cv2.EVENT_MBUTTONDBLCLK:
-            self.color= self.image[y, x][0]
-
-        if event==cv2.EVENT_LBUTTONDOWN:
-            if self.color>5:
-                self.color-=1
-
-        if event==cv2.EVENT_RBUTTONDOWN:
-            if self.color<250:
-                self.color+=1
-
-        self.lo[0]=self.color-20
-        self.hi[0]=self.color+20
-
     def seuillage(self, cap):
         self.bridge = CvBridge()
-        print("on est dans seuillage")
         print(type(cap))
         image_cv2 = self.bridge.imgmsg_to_cv2(img_msg=cap, desired_encoding='passthrough')
         print(type(image_cv2))
         self.frame=image_cv2
-        print("le frame ok")
         self.image=cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
         mask=cv2.inRange(self.image, self.lo, self.hi)
         # Flouttage de l'image
@@ -83,10 +67,6 @@ class Seuillage(Node):
 
 
     def process_img(self):
-        print("on va partir dans seuillage")
-        self.create_subscription(Image, '/image_image', self.seuillage, 10) 
-        self.publisher_bouteille = self.create_publisher(String, '/bouteille', 10)
-        print("subscribe&publish ok")
 
         self.color=70 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
@@ -94,7 +74,6 @@ class Seuillage(Node):
         self.hi=np.array([self.color+20, 255,255])
 
         self.color_info=(0, 0, 255)
-
         
         cv2.namedWindow('Camera')
         cv2.setMouseCallback('Camera', self.souris)
@@ -102,6 +81,9 @@ class Seuillage(Node):
 
         # Creating morphological kernel
         kernel = np.ones((3, 3), np.uint8)
+
+        self.create_subscription(Image, '/image_image', self.seuillage, 10) 
+        self.publisher_bouteille = self.create_publisher(String, '/bouteille', 10)
 
         while True: 
             rclpy.spin_once(self, timeout_sec=0.001)

@@ -24,11 +24,12 @@ The rivz2 config file is available in the /config directory
 
 
 todo :
+- dégager souris
 - affiner detection bouteille :
         - hsv
         - forme
 
-- Map en node
+- Map en ligne de cmd dans le launch : FAIT
 - Img depth en node (recupere centre zone verte et retourne la distance de ce pixel)
 
 - Orientation robot par rapport à map en node
