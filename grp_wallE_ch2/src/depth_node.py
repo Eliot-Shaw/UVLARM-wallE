@@ -19,10 +19,9 @@ class Profondeur(Node):
         self.cv2_image_depth = bridge.imgmsg_to_cv2(img_msg=image_depth_sub, desired_encoding='passthrough')
 
     def profondeur(self, coords_sub):
-        print("on va partir dans ok")
         message.data = self.cv2_image_depth.get_distance(coords_sub.x, coords_sub.y)
         self.publisher_distance_bouteille.publish(message.data)
-        print(f"lastImg ok ------------ {message}")
+        print(f"coo ok ------------ {message}")
 
 
     def process_img(self):
@@ -30,8 +29,6 @@ class Profondeur(Node):
         self.create_subscription(Image, '/image_depth', self.lastImg, 10) 
         self.create_subscription(Image, '/coords_img_bouteille', self.profondeur, 10) 
         self.publisher_distance_bouteille = self.create_publisher(Float32, '/distance_bouteille', 10)
-        message.data = 0.0
-        self.publisher_distance_bouteille.publish(message)
         print("subscribe&publish ok")
 
         while True: 
