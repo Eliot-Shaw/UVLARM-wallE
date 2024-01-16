@@ -14,3 +14,6 @@ launch:
 
 - executable:
     cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch1 seuillage_node.py'
+
+- executable : 
+    cmd: gnome-terminal --tab -e 'ros2 launch slam_toolbox online_sync_launch.py use_sim_time:=False'
