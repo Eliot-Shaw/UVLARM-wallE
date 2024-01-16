@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import pyrealsense2 as rs
 import time, numpy as np
 import cv2, rclpy
 from rclpy.node import Node
@@ -26,9 +25,7 @@ class Seuillage(Node):
 
     def seuillage(self, cap):
         self.bridge = CvBridge()
-        print(type(cap))
         image_cv2 = self.bridge.imgmsg_to_cv2(img_msg=cap, desired_encoding='passthrough')
-        print(type(image_cv2))
         self.frame=image_cv2
         self.image=cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
         mask=cv2.inRange(self.image, self.lo, self.hi)
@@ -68,7 +65,7 @@ class Seuillage(Node):
 
     def process_img(self):
 
-        self.color=70 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
+        self.color=70 # HSV : detecter H = 70 (vert bouteille)
 
         self.lo=np.array([self.color-20, 100, 50])
         self.hi=np.array([self.color+20, 255,255])
@@ -96,7 +93,6 @@ class Seuillage(Node):
 def main():
     rclpy.init()
     minimal_subscriber= Seuillage()
-    print("initialisation : ok")
     minimal_subscriber.process_img()
 
 if __name__ == '__main__':
