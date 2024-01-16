@@ -101,9 +101,11 @@ class Realsense(Node):
     def calcul_distance_bouteille(self, coords_bouteille):
         dist = Float32()
         print("getting the dist")
-        dist = self.depth_frame.get_distance(coords_bouteille.x, coords_bouteille.y)
+        dist.data = self.depth_frame.get_distance(coords_bouteille.x, coords_bouteille.y)
         print(f"dist : {dist}")
         self.publisher_distance_bouteille.publish(dist)
+        
+
 
     # Capture ctrl-c event
     def signalInteruption(signum, frame):
