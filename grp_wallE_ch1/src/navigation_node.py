@@ -7,7 +7,6 @@ from rclpy.node import Node
 from sensor_msgs.msg import PointCloud2
 from sensor_msgs_py import point_cloud2
 from geometry_msgs.msg import Twist
-import time, random
 
 
 class CloudToDecision(Node):
@@ -30,28 +29,27 @@ class CloudToDecision(Node):
                         pointObstacle = pointNuage
 
         if pointObstacle is None:
-            print("tourner tout droit")
+            print("Pas d'obstacle: on avance tout droit")
             velo = Twist()
             velo.linear.x= 0.3   # meter per second
             velo.angular.z= 0.0 # radian per second
             self.publisher_.publish(velo)
         else:
             if pointObstacle[0] < 0.3:
-                print(f"x : {pointObstacle[0]} ; y: {pointObstacle[1]}")
-                print("tourner.")
+                print("Obstacle trop proche !! Arrêt puis changement de direction")
                 velo = Twist()
                 velo.linear.x= 0.0   # meter per second
                 velo.angular.z= 0.5 # radian per second
                 self.publisher_.publish(velo)
             else:
                 if pointObstacle[1]<0:
-                    print("tourner à droite")
+                    print("Obstacle distant à gauche: on tourne à droite")
                     velo = Twist()
                     velo.linear.x= 0.3  # meter per second
                     velo.angular.z= 1.5 # radian per second
                     self.publisher_.publish(velo)
                 else:
-                    print("tourner à gauche")
+                    print("Obstacle distant à droite: on tourne à gauche")
                     velo = Twist()
                     velo.linear.x= 0.3   # meter per second
                     velo.angular.z= -1.5 # radian per second
@@ -60,9 +58,7 @@ class CloudToDecision(Node):
             
         
     
-    def process(self):
-        #rclpy.init()
-        #LA QUESTION EST POURQUOI LE _node              
+    def process(self):             
         self.create_subscription(PointCloud2, 'cloud', self.cloud_callback, 10)
         self.publisher_ = self.create_publisher(Twist, '/multi/cmd_nav', 10)  #/cmd_vel pour simu ; /multi/cmd_nav pour tbot
         rclpy.spin(self)
