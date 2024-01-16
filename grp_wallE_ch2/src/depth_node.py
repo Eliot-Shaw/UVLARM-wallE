@@ -16,7 +16,8 @@ class Profondeur(Node):
 
     def lastImg (self, image_depth_sub):
         print("on va partir dans lastImg")
-        self.cv2_image_depth = self.bridge.imgmsg_to_cv2(img_msg=image_depth_sub, desired_encoding='passthrough')
+        bridge = CvBridge()
+        self.cv2_image_depth = bridge.imgmsg_to_cv2(img_msg=image_depth_sub, desired_encoding='passthrough')
         print("lastImg ok")
 
     def profondeur(self, coords_sub):
