@@ -15,16 +15,14 @@ class Profondeur(Node):
         super().__init__('profondeur')
 
     def lastImg (self, image_depth_sub):
-        print("on va partir dans lastImg")
         bridge = CvBridge()
         self.cv2_image_depth = bridge.imgmsg_to_cv2(img_msg=image_depth_sub, desired_encoding='passthrough')
-        print("lastImg ok")
 
     def profondeur(self, coords_sub):
         print("on va partir dans ok")
         message.data = self.cv2_image_depth.get_distance(coords_sub.x, coords_sub.y)
         self.publisher_distance_bouteille.publish(message)
-        print("lastImg ok")
+        print(f"lastImg ok ------------ {message}")
 
 
     def process_img(self):
