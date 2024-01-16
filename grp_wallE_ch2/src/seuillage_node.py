@@ -15,27 +15,13 @@ class Seuillage(Node):
         super().__init__('seuillage')
 
 
-    def souris(self, event, x, y, flags, param):
+    def souris(self, event, x, y):
 
         if event == cv2.EVENT_MOUSEMOVE:
             # Conversion des trois couleurs RGB sous la souris en HSV
             px = self.frame[y,x]
             px_array = np.uint8([[px]])
             self.hsv_px = cv2.cvtColor(px_array,cv2.COLOR_BGR2HSV)
-
-        if event==cv2.EVENT_MBUTTONDBLCLK:
-            self.color= self.image[y, x][0]
-
-        if event==cv2.EVENT_LBUTTONDOWN:
-            if self.color>5:
-                self.color-=1
-
-        if event==cv2.EVENT_RBUTTONDOWN:
-            if self.color<250:
-                self.color+=1
-
-        self.lo[0]=self.color-20
-        self.hi[0]=self.color+20
 
     def seuillage(self, cap):
         self.bridge = CvBridge()
@@ -86,11 +72,6 @@ class Seuillage(Node):
 
 
     def process_img(self):
-        print("on va partir dans seuillage")
-        self.create_subscription(Image, '/image_image', self.seuillage, 10) 
-        self.publisher_coords_img_bouteille = self.create_publisher(Point, '/coords_img_bouteille', 10)
-        print("subscribe&publish ok")
-
         self.color=70 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
         self.lo=np.array([self.color-20, 100, 50])
@@ -105,6 +86,11 @@ class Seuillage(Node):
 
         # Creating morphological kernel
         kernel = np.ones((3, 3), np.uint8)
+
+        print("on va partir dans seuillage")
+        self.create_subscription(Image, '/image_image', self.seuillage, 10) 
+        self.publisher_coords_img_bouteille = self.create_publisher(Point, '/coords_img_bouteille', 10)
+        print("subscribe&publish ok")
 
         while True: 
             rclpy.spin_once(self, timeout_sec=0.001)
