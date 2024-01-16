@@ -57,6 +57,8 @@ class Seuillage(Node):
                 cv2.circle(self.frame, (int(x), int(y)), 5, self.color_info, 10)
                 cv2.line(self.frame, (int(x), int(y)), (int(x)+150, int(y)), self.color_info, 2)
                 cv2.putText(self.frame, "Bouteille !!!", (int(x)+10, int(y) -10), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
+                print(f"envoi du message {x}, {y}, {0}")
+                print(f"type message : {type(message)}")
                 # publish to topic
                 message.x = x
                 message.y = y
