@@ -15,7 +15,7 @@ class Seuillage(Node):
         super().__init__('seuillage')
 
 
-    def souris(self, event, x, y):
+    def souris(self, event, x, y, flags, param):
 
         if event == cv2.EVENT_MOUSEMOVE:
             # Conversion des trois couleurs RGB sous la souris en HSV
