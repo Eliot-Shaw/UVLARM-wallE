@@ -6,6 +6,9 @@ import sys, cv2, rclpy
 from rclpy.node import Node
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
+from std_msgs.msg import Float32
+from geometry_msgs.msg import Point
+
 
 isOk= True
 
@@ -13,14 +16,11 @@ isOk= True
 class Realsense(Node):
     def __init__(self, fps= 60):
         super().__init__('realsense')
-
         self.pipeline = rs.pipeline()
         self.config = rs.config()
 
 
     def start_connexion(self):
-        # Configure depth, infrared and color streams
-
         # Get device product line for setting a supporting resolution
         pipeline_wrapper = rs.pipeline_wrapper(self.pipeline)
         pipeline_profile = self.config.resolve(pipeline_wrapper)
@@ -49,17 +49,17 @@ class Realsense(Node):
         frames = self.pipeline.wait_for_frames()
 
         color_frame = frames.first(rs.stream.color)
-        depth_frame = frames.first(rs.stream.depth)
+        self.depth_frame = frames.first(rs.stream.depth)
 
         self.infra_frame_1 = frames.get_infrared_frame(1)
         self.infra_frame_2 = frames.get_infrared_frame(2)
         
-        if not (depth_frame and color_frame and self.infra_frame_1 and self.infra_frame_2):
+        if not (self.depth_frame and color_frame and self.infra_frame_1 and self.infra_frame_2):
             pass
 
 
         # Convert images to numpy arrays
-        self.depth_image = np.asanyarray(depth_frame.get_data())
+        self.depth_image = np.asanyarray(self.depth_frame.get_data())
         self.color_image = np.asanyarray(color_frame.get_data())
 
         self.infra_image_1 = np.asanyarray(self.infra_frame_1.get_data())
@@ -98,6 +98,12 @@ class Realsense(Node):
         self.infra_publisher_2.publish(msg_infra)
 
 
+    def calcul_distance_bouteille(self, coords_bouteille):
+        dist = Float32()
+        print("getting the dist")
+        dist = self.depth_frame.get_distance(coords_bouteille.x, coords_bouteille.y)
+        print(f"dist : {dist}")
+        self.publisher_distance_bouteille.publish(dist)
 
     # Capture ctrl-c event
     def signalInteruption(signum, frame):
@@ -115,12 +121,15 @@ class Realsense(Node):
         refTime= time.process_time()
         self.freq= 60
         sys.stdout.write("-")
+
+        self.create_subscription(Point, '/coords_img_bouteille', self.calcul_distance_bouteille, 10) 
+
         self.image_image_publisher = self.create_publisher(Image, '/image_image', 10)
         self.image_depth_publisher = self.create_publisher(Image, '/image_depth', 10)
 
-
         self.infra_publisher_1 = self.create_publisher(Image, '/infrared_1', 10) 
         self.infra_publisher_2 = self.create_publisher(Image, '/infrared_2', 10)
+        self.publisher_distance_bouteille = self.create_publisher(Float32, '/distance_bouteille', 10)
 
 
         
