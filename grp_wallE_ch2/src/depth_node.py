@@ -17,8 +17,9 @@ class Profondeur(Node):
         super().__init__('profondeur')
 
     def lastImg (self, image_depth_sub): 
-        bridge = CvBridge()
-        self.cv2_image_depth = bridge.imgmsg_to_cv2(img_msg=image_depth_sub, desired_encoding='passthrough')
+        #bridge = CvBridge()
+        #self.cv2_image_depth = bridge.imgmsg_to_cv2(img_msg=image_depth_sub, desired_encoding='passthrough')
+        self.cv2_image_depth = image_depth_sub
 #pas convertir en CV2 mais convertir en pyrelasense2
 
 
