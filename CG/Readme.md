@@ -17,3 +17,5 @@ ACTUELLE todo :
 
 - Orientation robot par rapport à map en node
 - Placage bouteille par rapport à bot (recupere distance bouteille, angle par rapp map et map et retourne coordonnées bouteilles carte)
+
+- #DEGAGER INFRA RESTANTS

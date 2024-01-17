@@ -6,6 +6,7 @@ from rclpy.node import Node
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Point
+from std_msgs.msg import Float32
 
 message = Point()
 
@@ -52,6 +53,7 @@ class Seuillage(Node):
                 cv2.circle(self.frame, (int(x), int(y)), 5, self.color_info, 10)
                 cv2.line(self.frame, (int(x), int(y)), (int(x)+150, int(y)), self.color_info, 2)
                 cv2.putText(self.frame, "Bouteille !!!", (int(x)+10, int(y) -10), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
+                
                 # publish to topic
                 message.x = x
                 message.y = y
@@ -66,11 +68,20 @@ class Seuillage(Node):
         if cv2.waitKey(1)&0xFF==ord('q'):
             pass
 
+#########################
+#PRINTER AFFICHE RIEN
+#########################
+    def printer(self, msg):
+        cv2.circle(self.frame, (int(message.x), int(message.y)), 50, self.color_info, 2)
+        cv2.putText(self.frame, "D="+str(round(msg.data,2)), (int(message.x)+10, int(message.y) -10), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
+        
+
+
 
     def process_img(self):
         self.color=70 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
-        self.lo=np.array([self.color-20, 100, 50])
+        self.lo=np.array([self.color-40, 100, 50])
         self.hi=np.array([self.color+20, 255,255])
 
         self.color_info=(0, 0, 255)
@@ -85,6 +96,7 @@ class Seuillage(Node):
 
         print("on va partir dans seuillage")
         self.create_subscription(Image, '/image_image', self.seuillage, 10) 
+        self.create_subscription(Float32, '/distance_bouteille', self.printer, 10) 
         self.publisher_coords_img_bouteille = self.create_publisher(Point, '/coords_img_bouteille', 10)
         print("subscribe&publish ok")
 

@@ -8,6 +8,7 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from std_msgs.msg import Float32
 from geometry_msgs.msg import Point
+import math
 
 
 isOk= True
@@ -18,6 +19,7 @@ class Realsense(Node):
         super().__init__('realsense')
         self.pipeline = rs.pipeline()
         self.config = rs.config()
+        self.colorizer = rs.colorizer()
 
 
     def start_connexion(self):
@@ -41,35 +43,41 @@ class Realsense(Node):
         self.config.enable_stream(rs.stream.color, 848, 480, rs.format.bgr8, 60)
         self.config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, 60)
 
-        self.config.enable_stream(rs.stream.infrared, 1, 848, 480, rs.format.y8, 60)
-        self.config.enable_stream(rs.stream.infrared, 2, 848, 480, rs.format.y8, 60)
+        # Start streaming
+        self.pipeline.start(self.config)
+
+        align_to = rs.stream.depth
+        self.align = rs.align(align_to)
+        self.refTime = time.process_time()
+        self.count= 1
+        self.freq= 60
+
+        #Visualisation point depth
+        self.color_info = (0,0,255)
+        self.rayon = 10
+
+
 
     def read_imgs(self):
         # Wait for a coherent tuple of frames: depth, color and accel
         frames = self.pipeline.wait_for_frames()
 
-        color_frame = frames.first(rs.stream.color)
-        self.depth_frame = frames.first(rs.stream.depth)
+        aligned_frames = self.align.process(frames)
+        self.depth_frame = aligned_frames.get_depth_frame()
+        aligned_color_frame = aligned_frames.get_color_frame()
 
-        self.infra_frame_1 = frames.get_infrared_frame(1)
-        self.infra_frame_2 = frames.get_infrared_frame(2)
-        
-        if not (self.depth_frame and color_frame and self.infra_frame_1 and self.infra_frame_2):
-            pass
-
+        if not self.depth_frame or not aligned_color_frame: pass
 
         # Convert images to numpy arrays
         self.depth_image = np.asanyarray(self.depth_frame.get_data())
-        self.color_image = np.asanyarray(color_frame.get_data())
+        self.depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(self.depth_image, alpha=0.03), cv2.COLORMAP_JET)
+        self.color_image = np.asanyarray(aligned_color_frame.get_data())	
 
-        self.infra_image_1 = np.asanyarray(self.infra_frame_1.get_data())
-        self.infra_image_2 = np.asanyarray(self.infra_frame_2.get_data())
+        # Get the intrinsic parameters
+        self.color_intrin = aligned_color_frame.profile.as_video_stream_profile().intrinsics
+        self.depth_colormap_dim = self.depth_colormap.shape
+        self.color_colormap_dim = self.color_image.shape
 
-        # Utilisation de colormap sur l'image infrared de la Realsense (image convertie en 8-bit par pixel)
-        self.infra_colormap_1 = cv2.applyColorMap(cv2.convertScaleAbs(self.infra_image_1, alpha=1), cv2.COLORMAP_JET)
-            
-        # Utilisation de colormap sur l'image infrared de la Realsense (image convertie en 8-bit par pixel)
-        self.infra_colormap_2 = cv2.applyColorMap(cv2.convertScaleAbs(self.infra_image_2, alpha=1), cv2.COLORMAP_JET)	
         
         
     def publish_imgs(self):
@@ -80,30 +88,22 @@ class Realsense(Node):
         self.image_image_publisher.publish(msg_image)
 
         # Utilisation de colormap sur l'image depth de la Realsense (image convertie en 8-bit par pixel)
-        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(self.depth_image, alpha=0.03), cv2.COLORMAP_JET)
-        msg_depth = self.bridge.cv2_to_imgmsg(depth_colormap,"bgr8")
+        msg_depth = self.bridge.cv2_to_imgmsg(self.depth_colormap,"bgr8")
         msg_depth.header.stamp = msg_image.header.stamp
         msg_depth.header.frame_id = "depth"
         self.image_depth_publisher.publish(msg_depth)
 
-        # Infrared
-        msg_infra = self.bridge.cv2_to_imgmsg(self.infra_colormap_1,"bgr8")
-        msg_infra.header.stamp = msg_image.header.stamp
-        msg_infra.header.frame_id = "infrared_1"
-        self.infra_publisher_1.publish(msg_infra)
-
-        msg_infra = self.bridge.cv2_to_imgmsg(self.infra_colormap_2,"bgr8")
-        msg_infra.header.stamp = msg_image.header.stamp
-        msg_infra.header.frame_id = "infrared_2"
-        self.infra_publisher_2.publish(msg_infra)
-
 
     def calcul_distance_bouteille(self, coords_bouteille):
 
+        #Use pixel value of  depth-aligned color image to get 3D axes
         dist = Float32()
         print("getting the dist")
-        dist.data = self.depth_frame.as_depth_frame().get_distance(int(coords_bouteille.x), int(coords_bouteille.y)) ####pb ici
-        print(f"dist : {dist}")
+        depth = self.depth_frame.get_distance(int(coords_bouteille.x),int(coords_bouteille.y)) ####pb ici
+        dx ,dy, dz = rs.rs2_deproject_pixel_to_point(self.color_intrin, [int(coords_bouteille.x),int(coords_bouteille.y)], depth)
+        dist.data = math.sqrt(((dx)**2) + ((dy)**2) + ((dz)**2))
+        print("Distance from camera to pixel:", dist.data)
+        print("Z-depth from camera surface to pixel surface:", depth)
         self.publisher_distance_bouteille.publish(dist)
         
 
@@ -118,20 +118,12 @@ class Realsense(Node):
 
     def process_img(self):
         self.start_connexion()
-        # Start streaming
-        self.pipeline.start(self.config)
-        count= 1
-        refTime= time.process_time()
-        self.freq= 60
         sys.stdout.write("-")
 
         self.create_subscription(Point, '/coords_img_bouteille', self.calcul_distance_bouteille, 10) 
 
         self.image_image_publisher = self.create_publisher(Image, '/image_image', 10)
         self.image_depth_publisher = self.create_publisher(Image, '/image_depth', 10)
-
-        self.infra_publisher_1 = self.create_publisher(Image, '/infrared_1', 10) 
-        self.infra_publisher_2 = self.create_publisher(Image, '/infrared_2', 10)
         self.publisher_distance_bouteille = self.create_publisher(Float32, '/distance_bouteille', 10)
 
 
@@ -140,12 +132,12 @@ class Realsense(Node):
             self.read_imgs()
             self.publish_imgs()
             # Frequency:
-            if count == 10 :
+            if self.count == 10 :
                 newTime= time.process_time()
-                self.freq= 10/((newTime-refTime))
-                refTime= newTime
-                count= 0
-            count+= 1
+                self.freq= 10/((newTime-self.refTime))
+                self.refTime= newTime
+                self.count= 0
+            self.count+= 1
             rclpy.spin_once(self, timeout_sec=0.001)
         # Stop streaming
         print("Ending...")
