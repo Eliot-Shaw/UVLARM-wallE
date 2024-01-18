@@ -108,7 +108,6 @@ class Realsense(Node):
             self.publisher_distance_bouteille.publish(dist)
         
 
-
     # Capture ctrl-c event
     def signalInteruption(signum, frame):
         global isOk
