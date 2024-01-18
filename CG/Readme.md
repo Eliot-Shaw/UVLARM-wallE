@@ -19,3 +19,8 @@ ACTUELLE todo :
 - Placage bouteille par rapport à bot (recupere distance bouteille, angle par rapp map et map et retourne coordonnées bouteilles carte)
 
 - #DEGAGER INFRA RESTANTS
+
+
+
+- on utilise depth_node ?
+- on utilise camera_node ?
