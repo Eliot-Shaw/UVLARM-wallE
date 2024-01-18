@@ -18,7 +18,7 @@ class Marker_Array(Node):
         self.marker_array = MarkerArray()
 
 
-    def marker_array(self, marker_bouteille):
+    def add_marker_array(self, marker_bouteille):
         print(f"entrer marker_array")
         added = False
         # Iterate through existing markers in the array
