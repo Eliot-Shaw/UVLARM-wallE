@@ -14,6 +14,7 @@ message = Point()
 class Seuillage(Node):
     def __init__(self, fps= 60):
         super().__init__('seuillage')
+        self.dist_bout = None
 
 
     def souris(self, event, x, y, flags, param):
@@ -53,7 +54,10 @@ class Seuillage(Node):
                 cv2.circle(self.frame, (int(x), int(y)), 5, self.color_info, 10)
                 cv2.line(self.frame, (int(x), int(y)), (int(x)+150, int(y)), self.color_info, 2)
                 cv2.putText(self.frame, "Bouteille !!!", (int(x)+10, int(y) -10), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
-                
+                if self.dist_bout != None :
+                    cv2.circle(self.frame, (int(message.x), int(message.y)), 5, self.color_info, 2)
+                    cv2.putText(self.frame, "D="+str(round(self.dist_bout,2)), (int(message.x), int(message.y) +30), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
+        
                 # publish to topic
                 message.x = x
                 message.y = y
@@ -72,9 +76,7 @@ class Seuillage(Node):
 #PRINTER AFFICHE RIEN
 #########################
     def printer(self, msg):
-        cv2.circle(self.frame, (int(message.x), int(message.y)), 50, self.color_info, 2)
-        cv2.putText(self.frame, "D="+str(round(msg.data,2)), (int(message.x)+10, int(message.y) -10), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
-        
+        self.dist_bout = msg.data
 
 
 

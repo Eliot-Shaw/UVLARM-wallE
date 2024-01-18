@@ -105,6 +105,10 @@ class Realsense(Node):
         print("Distance from camera to pixel:", dist.data)
         print("Z-depth from camera surface to pixel surface:", depth)
         self.publisher_distance_bouteille.publish(dist)
+        ####################################
+        #CA S'AFFICHE PAS DANS SEUILLAGE MAIS CA MARCHE
+        #Ne pas faire aller le robot trop vite sinon 0
+        ####################################
         
 
 
