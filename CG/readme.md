@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (anciens) Trucs à faire:
 - Clean le mvt du robot 
 - Commenter le code
@@ -19,3 +20,22 @@ ACTUELLE todo :
 - Placage bouteille par rapport à bot (recupere distance bouteille, angle par rapp map et map et retourne coordonnées bouteilles carte)
 
 - #DEGAGER INFRA RESTANTS
+=======
+Clarivce
+```
+      .-.
+     (o.o)
+      |=|
+     __|__
+   //.=|=.\\
+  // .=|=. \\
+  \\ .=|=. //
+   \\(_=_)//
+    (:| |:)
+     || ||
+     () ()
+     || ||
+     || ||
+    ==' '==
+```
+>>>>>>> e5b15fe6f20697295aae09bffe89e42726d10f3d
