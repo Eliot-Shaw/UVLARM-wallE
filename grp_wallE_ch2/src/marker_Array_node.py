@@ -66,7 +66,7 @@ class Marker_Array(Node):
 
     def work(self):
         print("on va partir dans subscribe&publish")
-        self.create_subscription(Marker, '/marker_bouteille_point', self.add_marker_array, 10) 
+        self.create_subscription(Marker, '/marker_bouteille', self.add_marker_array, 10) 
         self.publisher_marker_array = self.create_publisher(MarkerArray, '/map', 10)
         print("subscribe&publish ok")
         while True: 

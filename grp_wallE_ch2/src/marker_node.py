@@ -62,7 +62,7 @@ class Marker_Bouteille(Node):
     def work(self):
         print("on va partir dans subscribe&publish")
         self.create_subscription(Point, '/point_bouteille', self.marker_bouteille, 10) 
-        self.publisher_marker_bouteille = self.create_publisher(Marker, '/marker_bouteille_point', 10)
+        self.publisher_marker_bouteille = self.create_publisher(Marker, '/marker_bouteille', 10)
         print("subscribe&publish ok")
         while True: 
             rclpy.spin_once(self, timeout_sec=0.001)
