@@ -10,8 +10,6 @@ from geometry_msgs.msg import Point
 from geometry_msgs.msg import Point, Pose
 from visualization_msgs.msg import Marker, MarkerArray
 
-message = Float32()
-
 class Marker_Array(Node):
     def __init__(self, fps= 60):
         super().__init__('marker_array')
