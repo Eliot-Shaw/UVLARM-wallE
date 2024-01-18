@@ -95,7 +95,6 @@ class Realsense(Node):
 
 
     def calcul_distance_bouteille(self, coords_bouteille):
-
         #Use pixel value of  depth-aligned color image to get 3D axes
         dist = Float32()
         print("getting the dist")
