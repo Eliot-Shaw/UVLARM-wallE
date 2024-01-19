@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import numpy as np
+
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Point
@@ -30,7 +30,7 @@ class MarkerBouteille(Node):
         bouteille_pose.orientation.w = 0.0
 
         try:
-            self.transform_baselink_map = self.tf_buffer.lookup_transform("map", "base_link", rclpy.Time.now())
+            self.transform_baselink_map = self.tf_buffer.lookup_transform("map", "base_link", rclpy.time.Time.now())
             bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
         except Exception as e:
             print(f'Error transforming point: {e}')
