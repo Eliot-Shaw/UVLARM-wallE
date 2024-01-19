@@ -127,6 +127,11 @@ class Seuillage(Node):
 
 
     def process_img(self):
+        self.create_subscription(Image, '/image_image', self.seuillage, 10) 
+        self.create_subscription(Float32, '/distance_bouteille', self.printer, 10) 
+        self.publisher_coords_img_bouteille = self.create_publisher(Point, '/coords_img_bouteille', 10)
+        self.publisher_image_traitee = self.create_publisher(Image, '/img_traitee', 10)
+
         self.color=60 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
         self.lo=np.array([self.color-30, 100, 50])
@@ -134,18 +139,12 @@ class Seuillage(Node):
 
         self.color_info=(0, 0, 255)
 
-        
         cv2.namedWindow('Camera')
         cv2.setMouseCallback('Camera', self.souris)
         self.hsv_px = [0,0,0]
 
         # Creating morphological kernel
         kernel = np.ones((3, 3), np.uint8)
-
-        self.create_subscription(Image, '/image_image', self.seuillage, 10) 
-        self.create_subscription(Float32, '/distance_bouteille', self.printer, 10) 
-        self.publisher_coords_img_bouteille = self.create_publisher(Point, '/coords_img_bouteille', 10)
-        self.publisher_image_traitee = self.create_publisher(Image, '/img_traitee', 10)
 
         while True: 
             rclpy.spin_once(self, timeout_sec=0.001)
