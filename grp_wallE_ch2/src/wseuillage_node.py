@@ -49,7 +49,7 @@ class Seuillage(Node):
             #c=max(elements, key=cv2.contourArea)
             for objet in elements:
                 ((x, y), rayon)=cv2.minEnclosingCircle(objet)
-                if rayon>30 and self.is_mask_bouteille(objet, 0.01):
+                if rayon>30 and self.is_mask_bouteille(objet, 0.1):
                     # vue cam overlay
                     cv2.circle(self.image2, (int(x), int(y)), int(rayon), self.color_info, 2)
                     cv2.circle(self.frame, (int(x), int(y)), 5, self.color_info, 10)
