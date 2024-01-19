@@ -33,9 +33,9 @@ class Seuillage(Node):
         # Flouttage de l'image
         self.image=cv2.blur(self.image, (7, 7))
         # Erosion d'un mask
-        mask=cv2.erode(mask, None, iterations=4)
+        mask=cv2.erode(mask, None, iterations=7)
         # dilatation d'un mask
-        mask=cv2.dilate(mask, None, iterations=4)
+        mask=cv2.dilate(mask, None, iterations=7)
         self.image2=cv2.bitwise_and(self.frame, self.frame, mask= mask)
         cv2.putText(self.frame, "Couleur: {:d}".format(self.color), (10, 30), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
 
