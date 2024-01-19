@@ -109,8 +109,10 @@ class Seuillage(Node):
         ret4 = cv2.matchShapes(objet,cnt4,1,0.0)
 
         if ret1 < marge or ret2 < marge or ret3 < marge or ret4 < marge:
+            print("is btl")
             return True
         
+        print("is not btl")
         return False
 
 
