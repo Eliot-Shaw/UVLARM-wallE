@@ -93,13 +93,13 @@ class Seuillage(Node):
         #msk,contours,hierarchy = cv2.findContours(objet,2,1)
         #cnt_mask = contours[0]
 
-        contours,hierarchy = cv2.findContours(thresh1,2,1)
+        contours = cv2.findContours(thresh1,2,1)[-2]
         cnt1 = contours[0]
-        contours,hierarchy = cv2.findContours(thresh2,2,1)
+        contours = cv2.findContours(thresh2,2,1)[-2]
         cnt2 = contours[0]
-        contours,hierarchy = cv2.findContours(thresh3,2,1)
+        contours = cv2.findContours(thresh3,2,1)[-2]
         cnt3 = contours[0]
-        contours,hierarchy = cv2.findContours(thresh4,2,1)
+        contours = cv2.findContours(thresh4,2,1)[-2]
         cnt4 = contours[0]
 
 
