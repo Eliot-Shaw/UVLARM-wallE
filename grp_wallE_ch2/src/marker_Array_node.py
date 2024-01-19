@@ -9,6 +9,7 @@ from std_msgs.msg import Float32
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Point, Pose
 from visualization_msgs.msg import Marker, MarkerArray
+import math
 
 class Marker_Array(Node):
     def __init__(self, fps= 60):
@@ -22,11 +23,11 @@ class Marker_Array(Node):
         # Iterate through existing markers in the array
         for existing_marker in self.marker_array:
             # Calculate the distance between marker_bouteille and existing_marker
-            distance = distance_pose(marker_bouteille.pose, existing_marker.pose)
+            distance = self.distance_pose(marker_bouteille.pose, existing_marker.pose)
 
             # If the distance is less than 0.1, update the marker's position to the average
             if distance < 0.1:
-                existing_marker.pose = moyenne_pose(marker_bouteille.pose, existing_marker.pose)
+                existing_marker.pose = self.moyenne_pose(marker_bouteille.pose, existing_marker.pose)
                 print(f"Updated marker position based on average distance: {existing_marker.pose}")
                 added = True
                 break
@@ -67,7 +68,7 @@ class Marker_Array(Node):
     def work(self):
         print("on va partir dans subscribe&publish")
         self.create_subscription(Marker, '/marker_bouteille', self.add_marker_array, 10) 
-        self.publisher_marker_array = self.create_publisher(MarkerArray, '/map', 10)
+        self.publisher_marker_array = self.create_publisher(MarkerArray, '/marker_array_bouteille', 10)
         print("subscribe&publish ok")
         while True: 
             rclpy.spin_once(self, timeout_sec=0.001)
