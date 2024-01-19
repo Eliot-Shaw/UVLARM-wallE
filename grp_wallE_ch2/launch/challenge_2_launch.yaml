@@ -16,15 +16,6 @@ launch:
  #  cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch1 navigation_node.py'
 
 - executable:
-    cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch2 camera_node2.py'
-
-- executable:
-    cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch2 seuillage_node.py'
-
-#- executable : 
-#   cmd: gnome-terminal --tab -e 'ros2 launch slam_toolbox online_sync_launch.py use_sim_time:=False'
-
-- executable:
     cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch2 marker_node.py'
 
 - executable:
