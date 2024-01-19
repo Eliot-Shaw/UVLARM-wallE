@@ -46,23 +46,24 @@ class Seuillage(Node):
                 font, 1, (255, 255, 255), 1, cv2.LINE_AA)
         elements=cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
         if len(elements) > 0:
-            c=max(elements, key=cv2.contourArea)
-            ((x, y), rayon)=cv2.minEnclosingCircle(c)
-            if rayon>30:
-                # vue cam overlay
-                cv2.circle(self.image2, (int(x), int(y)), int(rayon), self.color_info, 2)
-                cv2.circle(self.frame, (int(x), int(y)), 5, self.color_info, 10)
-                cv2.line(self.frame, (int(x), int(y)), (int(x)+150, int(y)), self.color_info, 2)
-                cv2.putText(self.frame, "Bouteille !!!", (int(x)+10, int(y) -10), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
-                if self.dist_bout != None :
-                    cv2.circle(self.frame, (int(message.x), int(message.y)), 5, self.color_info, 2)
-                    cv2.putText(self.frame, "D="+str(round(self.dist_bout,2)), (int(message.x), int(message.y) +30), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
-        
-                # publish to topic
-                message.x = x
-                message.y = y
-                message.z = 0.0
-                self.publisher_coords_img_bouteille.publish(message)
+            #c=max(elements, key=cv2.contourArea)
+            for objet in elements:
+                ((x, y), rayon)=cv2.minEnclosingCircle(objet)
+                if rayon>30:
+                    # vue cam overlay
+                    cv2.circle(self.image2, (int(x), int(y)), int(rayon), self.color_info, 2)
+                    cv2.circle(self.frame, (int(x), int(y)), 5, self.color_info, 10)
+                    cv2.line(self.frame, (int(x), int(y)), (int(x)+150, int(y)), self.color_info, 2)
+                    cv2.putText(self.frame, "Bouteille !!!", (int(x)+10, int(y) -10), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
+                    if self.dist_bout != None :
+                        cv2.circle(self.frame, (int(message.x), int(message.y)), 5, self.color_info, 2)
+                        cv2.putText(self.frame, "D="+str(round(self.dist_bout,2)), (int(message.x), int(message.y) +30), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
+            
+                    # publish to topic
+                    message.x = x
+                    message.y = y
+                    message.z = 0.0
+                    self.publisher_coords_img_bouteille.publish(message)
 
 
         cv2.imshow('Camera', self.frame)
@@ -81,9 +82,9 @@ class Seuillage(Node):
 
 
     def process_img(self):
-        self.color=70 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
+        self.color=60 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
-        self.lo=np.array([self.color-40, 100, 50])
+        self.lo=np.array([self.color-20, 100, 50])
         self.hi=np.array([self.color+20, 255,255])
 
         self.color_info=(0, 0, 255)
