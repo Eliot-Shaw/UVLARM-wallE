@@ -22,3 +22,5 @@ ACTUELLE todo :
 - #DEGAGER INFRA RESTANTS
 - ssh ordi controle
 - petites portes navigation
+
+# VERIFIER PK MARKER PAS COMPLET ? MARKER NODE LIGNE 65

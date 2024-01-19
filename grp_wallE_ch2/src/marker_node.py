@@ -30,20 +30,21 @@ class MarkerBouteille(Node):
         bouteille_pose.orientation.z = 0.0
         bouteille_pose.orientation.w = 0.0
 
-        try:
-            self.transform_baselink_map = self.tf_buffer.lookup_transform(target_frame='map', source_frame='odom', time=rclpy.time.Time())
-        except Exception as e:
-            print(f'Error transforming point: {e}')
-            return
-        try:
-            bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
-        except Exception as e:
-            print(f'Error transforming point n°2: {e}')
-            return
+        # try:
+        #     self.transform_baselink_map = self.tf_buffer.lookup_transform(target_frame='map', source_frame='odom', time=rclpy.time.Time())
+        # except Exception as e:
+        #     print(f'Error transforming point: {e}')
+        #     return
+        # try:
+        #     bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
+        # except Exception as e:
+        #     print(f'Error transforming point n°2: {e}')
+        #     return
+
 
         marker = Marker()
         marker.header.frame_id = "map"
-        marker.header.stamp = rclpy.time.Time.now()
+        marker.header.stamp = rclpy.time.Time()
 
         marker.type = 3  # cylindre
 
@@ -59,14 +60,17 @@ class MarkerBouteille(Node):
         marker.color.a = 1.0  # Alpha (transparence)
 
         # Set the pose of the marker based on the transformed pose
-        marker.pose = bouteille_pose_transformed.pose
-
+        marker.pose = bouteille_pose
+        
+# VERIFIER PK MARKER PAS COMPLET ?
         self.publisher_marker_bouteille.publish(marker)
+        
+
 
     def work(self):
         print("on va partir dans subscribe&publish")
-        self.create_subscription(Point, '/point_bouteille', self.create_marker_bouteille, 10) 
         self.publisher_marker_bouteille = self.create_publisher(Marker, '/marker_bouteille', 10)
+        self.create_subscription(Point, '/point_bouteille', self.create_marker_bouteille, 10) 
         print("subscribe&publish ok")
         while rclpy.ok():
             rclpy.spin_once(self, timeout_sec=0.001)
