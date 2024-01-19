@@ -70,6 +70,9 @@ class Seuillage(Node):
         cv2.imshow('image2', self.image2)
         cv2.imshow('Mask', mask)
 
+        img_traitee = self.bridge.cv2_to_imgmsg(img_traitee, "bgr8")
+        self.publisher_image_traitee.publish(img_traitee)
+
         if cv2.waitKey(1)&0xFF==ord('q'):
             pass
 
@@ -140,6 +143,7 @@ class Seuillage(Node):
         self.create_subscription(Image, '/image_image', self.seuillage, 10) 
         self.create_subscription(Float32, '/distance_bouteille', self.printer, 10) 
         self.publisher_coords_img_bouteille = self.create_publisher(Point, '/coords_img_bouteille', 10)
+        self.publisher_image_traitee = self.create_publisher(Image, '/img_traitee', 10)
 
         while True: 
             rclpy.spin_once(self, timeout_sec=0.001)
