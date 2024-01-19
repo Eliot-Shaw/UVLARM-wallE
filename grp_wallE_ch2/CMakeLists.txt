@@ -37,6 +37,10 @@ install( PROGRAMS
   src/marker_node.py
   src/navigation_node.py
   src/seuillage_node.py
+  images/shape_btl1.png
+  images/shape_btl2.png
+  images/shape_btl3.png
+  images/shape_btl4.png
   DESTINATION lib/${PROJECT_NAME})
 ########################################################################################################################################################
 
