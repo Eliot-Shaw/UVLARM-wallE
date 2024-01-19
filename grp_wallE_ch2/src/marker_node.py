@@ -6,7 +6,8 @@ from rclpy.node import Node
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Point, Pose
 from visualization_msgs.msg import Marker
-import tf2_ros
+from tf2_ros.buffer import Buffer
+from tf2_ros.transform_listener import TransformListener
 import tf2_geometry_msgs
 
 
@@ -14,8 +15,8 @@ class Marker_Bouteille(Node):
     def __init__(self, fps= 60):
         super().__init__('marker_bouteille')
         self.marker_bouteille = Marker()
-        self.tf_buffer = tf2_ros.Buffer(rclpy.duration.Duration(100.0))  # tf buffer length
-        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
+        self.tf_buffer = Buffer()  # tf buffer length
+        self.tf_listener = TransformListener(self.tf_buffer, self)
 
     def marker_bouteille(self, point_bouteille):
         print(f"entrer marker_bouteille")
@@ -29,10 +30,10 @@ class Marker_Bouteille(Node):
         bouteille_pose.orientation.z = 0.0
         bouteille_pose.orientation.w = 0.0
 
-        self.transform_baselink_map = self.tf_buffer.lookup_transform("map", "base_link", point_bouteille.header.stamp, rclpy.duration.Duration(1.0))
-                                                                                #rclpy.Time.now() si marche pas
+        self.transform_baselink_map = self.tf_buffer.lookup_transform("map", "base_link", point_bouteille.header.stamp)
+                                                                                #rclpy.Time.time() si marche pas
 
-        self.bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
+        # deprecated self.bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
 
         marker = Marker()
         
