@@ -76,10 +76,10 @@ class Seuillage(Node):
 
 
     def is_mask_bouteille(self, objet, marge):
-        img1 = cv2.imread('shape_btl1.jpg', cv2.IMREAD_GRAYSCALE)
-        img2 = cv2.imread('shape_btl2.jpg', cv2.IMREAD_GRAYSCALE)
-        img3 = cv2.imread('shape_btl3.jpg', cv2.IMREAD_GRAYSCALE)
-        img4 = cv2.imread('shape_btl4.jpg', cv2.IMREAD_GRAYSCALE)
+        img1 = cv2.imread('shape_btl1.png', cv2.IMREAD_GRAYSCALE)
+        img2 = cv2.imread('shape_btl2.png', cv2.IMREAD_GRAYSCALE)
+        img3 = cv2.imread('shape_btl3.png', cv2.IMREAD_GRAYSCALE)
+        img4 = cv2.imread('shape_btl4.png', cv2.IMREAD_GRAYSCALE)
         assert img1 is not None, "file img1 could not be read, check with os.path.exists()"
         assert img2 is not None, "file img2 could not be read, check with os.path.exists()"
         assert img3 is not None, "file img3 could not be read, check with os.path.exists()"
