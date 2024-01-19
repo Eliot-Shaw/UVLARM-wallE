@@ -33,9 +33,9 @@ class Seuillage(Node):
         # Flouttage de l'image
         self.image=cv2.blur(self.image, (7, 7))
         # Erosion d'un mask
-        mask=cv2.erode(mask, None, iterations=7)
+        mask=cv2.erode(mask, None, iterations=3)
         # dilatation d'un mask
-        mask=cv2.dilate(mask, None, iterations=7)
+        mask=cv2.dilate(mask, None, iterations=3)
         self.image2=cv2.bitwise_and(self.frame, self.frame, mask= mask)
         cv2.putText(self.frame, "Couleur: {:d}".format(self.color), (10, 30), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
 
@@ -49,7 +49,7 @@ class Seuillage(Node):
             #c=max(elements, key=cv2.contourArea)
             for objet in elements:
                 ((x, y), rayon)=cv2.minEnclosingCircle(objet)
-                if rayon>30 and self.is_mask_bouteille(objet, 0.1):
+                if rayon>25 and self.is_mask_bouteille(objet, 0.2):
                     # vue cam overlay
                     cv2.circle(self.image2, (int(x), int(y)), int(rayon), self.color_info, 2)
                     cv2.circle(self.frame, (int(x), int(y)), 5, self.color_info, 10)
@@ -124,8 +124,8 @@ class Seuillage(Node):
     def process_img(self):
         self.color=60 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
-        self.lo=np.array([self.color-20, 100, 50])
-        self.hi=np.array([self.color+20, 255,255])
+        self.lo=np.array([self.color-30, 100, 50])
+        self.hi=np.array([self.color+30, 255,255])
 
         self.color_info=(0, 0, 255)
 
