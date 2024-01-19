@@ -32,8 +32,10 @@ install(DIRECTORY
 # pythonScripts
 install( PROGRAMS 
   src/camera_node2.py
+  src/laser_scan-point_cloud.py
   src/marker_array_node.py
   src/marker_node.py
+  src/navigation_node.py
   src/seuillage_node.py
   DESTINATION lib/${PROJECT_NAME})
 ########################################################################################################################################################

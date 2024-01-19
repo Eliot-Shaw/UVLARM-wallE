@@ -67,7 +67,7 @@ class MarkerBouteille(Node):
             rclpy.spin_once(self, timeout_sec=0.001)
 
 def main():
-    print("depth")
+    print("marker_node")
     rclpy.init()
     minimal_subscriber = MarkerBouteille()
     print("initialisation : ok")
