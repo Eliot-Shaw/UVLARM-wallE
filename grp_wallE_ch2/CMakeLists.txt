@@ -32,7 +32,7 @@ install(DIRECTORY
 # pythonScripts
 install( PROGRAMS 
   src/camera_node2.py
-  src/marker_Array_node.py
+  src/marker_array_node.py
   src/marker_node.py
   src/seuillage_node.py
   DESTINATION lib/${PROJECT_NAME})
