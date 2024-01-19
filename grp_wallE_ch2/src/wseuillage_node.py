@@ -137,11 +137,9 @@ class Seuillage(Node):
         # Creating morphological kernel
         kernel = np.ones((3, 3), np.uint8)
 
-        print("on va partir dans seuillage")
         self.create_subscription(Image, '/image_image', self.seuillage, 10) 
         self.create_subscription(Float32, '/distance_bouteille', self.printer, 10) 
         self.publisher_coords_img_bouteille = self.create_publisher(Point, '/coords_img_bouteille', 10)
-        print("subscribe&publish ok")
 
         while True: 
             rclpy.spin_once(self, timeout_sec=0.001)
@@ -152,10 +150,8 @@ class Seuillage(Node):
 
 
 def main():
-    print("seuillage")
     rclpy.init()
     minimal_subscriber= Seuillage()
-    print("initialisation : ok")
     minimal_subscriber.process_img()
 
 if __name__ == '__main__':
