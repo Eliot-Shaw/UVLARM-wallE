@@ -110,7 +110,7 @@ class Realsense(Node):
         point_bouteille.z = dy
         point_bouteille.z = dz
         if dist.data > 0.15: #éviter les 0 quand le robot va trop vite
-            self.dist_publisher.publish(dist.data)
+            self.dist_publisher.publish(dist)
             self.publisher_point_bouteille.publish(point_bouteille)
         
 
