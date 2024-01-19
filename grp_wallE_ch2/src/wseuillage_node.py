@@ -113,17 +113,14 @@ class Seuillage(Node):
             pass
 
 
-
     def is_mask_bouteille(self, objet, marge):
         ret1 = cv2.matchShapes(objet,self.cnt1,1,0.0)
         ret2 = cv2.matchShapes(objet,self.cnt2,1,0.0)
         ret3 = cv2.matchShapes(objet,self.cnt3,1,0.0)
         ret4 = cv2.matchShapes(objet,self.cnt4,1,0.0)
-
         if ret1 < marge or ret2 < marge or ret3 < marge or ret4 < marge:
             print("is btl")
             return True
-        
         print("is not btl")
         return False
 
