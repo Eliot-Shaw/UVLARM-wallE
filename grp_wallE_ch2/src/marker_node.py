@@ -30,16 +30,11 @@ class MarkerBouteille(Node):
         bouteille_pose.orientation.z = 0.0
         bouteille_pose.orientation.w = 0.0
 
-        try:
-            self.transform_baselink_map = self.tf_buffer.lookup_transform(target_frame='map', source_frame='base_link', time=rclpy.time.Time())
-        except Exception as e:
-            print(f'Error transforming point: {e}')
-            return
-        try:
-            bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
-        except Exception as e:
-            print(f'Error transforming point n°2: {e}')
-            return
+        
+        self.transform_baselink_map = self.tf_buffer.lookup_transform(target_frame='map', source_frame='base_link', time=rclpy.time.Time())
+    
+        bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
+        
 
         marker = Marker()
         marker.header.frame_id = "map"
