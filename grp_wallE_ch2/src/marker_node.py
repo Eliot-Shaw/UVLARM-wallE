@@ -4,42 +4,43 @@ import numpy as np
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Point
-from geometry_msgs.msg import Point, Pose
+from geometry_msgs.msg import Pose
 from visualization_msgs.msg import Marker
-import tf2_ros
+from tf2_ros.buffer import Buffer
+from tf2_ros.transform_listener import TransformListener
 import tf2_geometry_msgs
 
-
-class Marker_Bouteille(Node):
-    def __init__(self, fps= 60):
+class MarkerBouteille(Node):
+    def __init__(self, fps=60):
         super().__init__('marker_bouteille')
         self.marker_bouteille = Marker()
-        self.tf_buffer = tf2_ros.Buffer(rclpy.duration.Duration(100.0))  # tf buffer length
-        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
+        self.tf_buffer = Buffer()  # tf buffer length
+        self.tf_listener = TransformListener(self.tf_buffer, self)
 
-    def marker_bouteille(self, point_bouteille):
-        print(f"entrer marker_bouteille")
+    def create_marker_bouteille(self, point_bouteille):
+        print(f"entrer create_marker_bouteille")
         bouteille_pose = Pose()
         bouteille_pose.position.x = point_bouteille.x
         bouteille_pose.position.y = point_bouteille.y
         bouteille_pose.position.z = point_bouteille.z
         
-        bouteille_pose.orientation.x = 0.0 #sais pas encore
+        bouteille_pose.orientation.x = 0.0  # À remplir
         bouteille_pose.orientation.y = 0.0
         bouteille_pose.orientation.z = 0.0
         bouteille_pose.orientation.w = 0.0
 
-        self.transform_baselink_map = self.tf_buffer.lookup_transform("map", "base_link", point_bouteille.header.stamp, rclpy.duration.Duration(1.0))
-                                                                                #rclpy.Time.now() si marche pas
-
-        self.bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
+        try:
+            self.transform_baselink_map = self.tf_buffer.lookup_transform("map", "base_link", rclpy.Time.now())
+            bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
+        except Exception as e:
+            print(f'Error transforming point: {e}')
+            return
 
         marker = Marker()
-        
         marker.header.frame_id = "map"
-        marker.header.stamp = self.bouteille_pose_transformed.header.stamp #point_bouteille.header.stamp ou rclpy.Time.now() si marche pas
+        marker.header.stamp = rclpy.Time.now()
 
-        marker.type = 3 # = cylindre
+        marker.type = 3  # cylindre
 
         # Taille 
         marker.scale.x = 0.1
@@ -53,25 +54,25 @@ class Marker_Bouteille(Node):
         marker.color.a = 1.0  # Alpha (transparence)
 
         # Set the pose of the marker based on the transformed pose
-        marker.pose = self.bouteille_pose_transformed.pose
+        marker.pose = bouteille_pose_transformed.pose
 
-
+        self.publisher_marker_bouteille.publish(marker)
 
     def work(self):
         print("on va partir dans subscribe&publish")
-        self.create_subscription(Point, '/point_bouteille', self.marker_bouteille, 10) 
+        self.create_subscription(Point, '/point_bouteille', self.create_marker_bouteille, 10) 
         self.publisher_marker_bouteille = self.create_publisher(Marker, '/marker_bouteille', 10)
         print("subscribe&publish ok")
-        while True: 
+        while rclpy.ok():
             rclpy.spin_once(self, timeout_sec=0.001)
 
 def main():
     print("depth")
     rclpy.init()
-    minimal_subscriber = Marker_Bouteille()
+    minimal_subscriber = MarkerBouteille()
     print("initialisation : ok")
     minimal_subscriber.work()
 
 if __name__ == '__main__':
-# call main() function
+    # call main() function
     main()
