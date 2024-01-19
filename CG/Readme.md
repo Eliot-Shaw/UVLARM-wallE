@@ -22,7 +22,3 @@ ACTUELLE todo :
 - #DEGAGER INFRA RESTANTS
 - ssh ordi controle
 - petites portes navigation
-
-
-- on utilise depth_node ?
-- on utilise camera_node ?

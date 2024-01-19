@@ -97,18 +97,16 @@ class Realsense(Node):
     def calcul_distance_bouteille(self, coords_bouteille):
         #Use pixel value of  depth-aligned color image to get 3D axes
         point_bouteille = Point()
-        print("getting the dist")
+        dist = Float32()
         depth = self.depth_frame.get_distance(int(coords_bouteille.x),int(coords_bouteille.y)) ####pb ici
         dx ,dy, dz = rs.rs2_deproject_pixel_to_point(self.color_intrin, [int(coords_bouteille.x),int(coords_bouteille.y)], depth)
         dist.data = math.sqrt(((dx)**2) + ((dy)**2) + ((dz)**2))
-        print("Distance from camera to pixel:", dist.data)
-        print("Z-depth from camera surface to pixel surface:", depth)
-        print(f"dx : {dx}, dy : {dy}, dz : {dz}")
 
         point_bouteille.x = dx
         point_bouteille.z = dy
         point_bouteille.z = dz
         if dist.data > 0.15: #éviter les 0 quand le robot va trop vite
+            self.dist_publisher.publish(dist)
             self.publisher_point_bouteille.publish(point_bouteille)
         
 
@@ -128,6 +126,7 @@ class Realsense(Node):
 
         self.image_image_publisher = self.create_publisher(Image, '/image_image', 10)
         self.image_depth_publisher = self.create_publisher(Image, '/image_depth', 10)
+        self.dist_publisher = self.create_publisher(Float32, '/distance_bouteille', 10)
         self.publisher_point_bouteille = self.create_publisher(Point, '/point_bouteille', 10)
 
 

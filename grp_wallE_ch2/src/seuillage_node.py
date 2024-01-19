@@ -33,9 +33,9 @@ class Seuillage(Node):
         # Flouttage de l'image
         self.image=cv2.blur(self.image, (7, 7))
         # Erosion d'un mask
-        mask=cv2.erode(mask, None, iterations=4)
+        mask=cv2.erode(mask, None, iterations=3)
         # dilatation d'un mask
-        mask=cv2.dilate(mask, None, iterations=4)
+        mask=cv2.dilate(mask, None, iterations=3)
         self.image2=cv2.bitwise_and(self.frame, self.frame, mask= mask)
         cv2.putText(self.frame, "Couleur: {:d}".format(self.color), (10, 30), cv2.FONT_HERSHEY_DUPLEX, 1, self.color_info, 1, cv2.LINE_AA)
 
@@ -49,7 +49,7 @@ class Seuillage(Node):
             #c=max(elements, key=cv2.contourArea)
             for objet in elements:
                 ((x, y), rayon)=cv2.minEnclosingCircle(objet)
-                if rayon>30:
+                if rayon>25 and self.is_mask_bouteille(objet, 0.2):
                     # vue cam overlay
                     cv2.circle(self.image2, (int(x), int(y)), int(rayon), self.color_info, 2)
                     cv2.circle(self.frame, (int(x), int(y)), 5, self.color_info, 10)
@@ -73,9 +73,49 @@ class Seuillage(Node):
         if cv2.waitKey(1)&0xFF==ord('q'):
             pass
 
-#########################
-#PRINTER AFFICHE RIEN
-#########################
+
+
+    def is_mask_bouteille(self, objet, marge):
+        img1 = cv2.imread('../images/shape_btl1.png', cv2.IMREAD_GRAYSCALE)
+        img2 = cv2.imread('../images/shape_btl2.png', cv2.IMREAD_GRAYSCALE)
+        img3 = cv2.imread('../images/shape_btl3.png', cv2.IMREAD_GRAYSCALE)
+        img4 = cv2.imread('../images/shape_btl4.png', cv2.IMREAD_GRAYSCALE)
+        assert img1 is not None, "file img1 could not be read, check with os.path.exists()"
+        assert img2 is not None, "file img2 could not be read, check with os.path.exists()"
+        assert img3 is not None, "file img3 could not be read, check with os.path.exists()"
+        assert img4 is not None, "file img4 could not be read, check with os.path.exists()"
+
+        ret, thresh1 = cv2.threshold(img1, 127, 255,0)
+        ret, thresh2 = cv2.threshold(img2, 127, 255,0)
+        ret, thresh3 = cv2.threshold(img3, 127, 255,0)
+        ret, thresh4 = cv2.threshold(img4, 127, 255,0)
+
+        #msk,contours,hierarchy = cv2.findContours(objet,2,1)
+        #cnt_mask = contours[0]
+
+        contours = cv2.findContours(thresh1,2,1)[-2]
+        cnt1 = contours[0]
+        contours = cv2.findContours(thresh2,2,1)[-2]
+        cnt2 = contours[0]
+        contours = cv2.findContours(thresh3,2,1)[-2]
+        cnt3 = contours[0]
+        contours = cv2.findContours(thresh4,2,1)[-2]
+        cnt4 = contours[0]
+
+
+        ret1 = cv2.matchShapes(objet,cnt1,1,0.0)
+        ret2 = cv2.matchShapes(objet,cnt2,1,0.0)
+        ret3 = cv2.matchShapes(objet,cnt3,1,0.0)
+        ret4 = cv2.matchShapes(objet,cnt4,1,0.0)
+
+        if ret1 < marge or ret2 < marge or ret3 < marge or ret4 < marge:
+            print("is btl")
+            return True
+        
+        print("is not btl")
+        return False
+
+
     def printer(self, msg):
         self.dist_bout = msg.data
 
@@ -84,8 +124,8 @@ class Seuillage(Node):
     def process_img(self):
         self.color=60 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
-        self.lo=np.array([self.color-10, 100, 50])
-        self.hi=np.array([self.color+10, 255,200])
+        self.lo=np.array([self.color-30, 100, 50])
+        self.hi=np.array([self.color+30, 255,255])
 
         self.color_info=(0, 0, 255)
 
@@ -97,11 +137,9 @@ class Seuillage(Node):
         # Creating morphological kernel
         kernel = np.ones((3, 3), np.uint8)
 
-        print("on va partir dans seuillage")
         self.create_subscription(Image, '/image_image', self.seuillage, 10) 
         self.create_subscription(Float32, '/distance_bouteille', self.printer, 10) 
         self.publisher_coords_img_bouteille = self.create_publisher(Point, '/coords_img_bouteille', 10)
-        print("subscribe&publish ok")
 
         while True: 
             rclpy.spin_once(self, timeout_sec=0.001)
@@ -112,10 +150,8 @@ class Seuillage(Node):
 
 
 def main():
-    print("seuillage")
     rclpy.init()
     minimal_subscriber= Seuillage()
-    print("initialisation : ok")
     minimal_subscriber.process_img()
 
 if __name__ == '__main__':

@@ -65,7 +65,7 @@ class Seuillage(Node):
 
     def process_img(self):
 
-        self.color=70 # HSV : detecter H = 70 (vert bouteille)
+        self.color=60 # HSV : detecter H = 70 (vert bouteille)
 
         self.lo=np.array([self.color-20, 100, 50])
         self.hi=np.array([self.color+20, 255,255])

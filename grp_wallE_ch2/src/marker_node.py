@@ -8,13 +8,13 @@ from geometry_msgs.msg import Point, Pose
 from visualization_msgs.msg import Marker
 import tf2_ros
 import tf2_geometry_msgs
-import rospy
+
 
 class Marker_Bouteille(Node):
     def __init__(self, fps= 60):
         super().__init__('marker_bouteille')
         self.marker_bouteille = Marker()
-        self.tf_buffer = tf2_ros.Buffer(rospy.Duration(100.0))  # tf buffer length
+        self.tf_buffer = tf2_ros.Buffer(rclpy.duration.Duration(100.0))  # tf buffer length
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
 
     def marker_bouteille(self, point_bouteille):
@@ -29,15 +29,15 @@ class Marker_Bouteille(Node):
         bouteille_pose.orientation.z = 0.0
         bouteille_pose.orientation.w = 0.0
 
-        self.transform_baselink_map = self.tf_buffer.lookup_transform("map", "base_link", point_bouteille.header.stamp, rospy.Duration(1.0))
-                                                                                #rospy.Time.now() si marche pas
+        self.transform_baselink_map = self.tf_buffer.lookup_transform("map", "base_link", point_bouteille.header.stamp, rclpy.duration.Duration(1.0))
+                                                                                #rclpy.Time.now() si marche pas
 
         self.bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
 
         marker = Marker()
         
         marker.header.frame_id = "map"
-        marker.header.stamp = self.bouteille_pose_transformed.header.stamp #point_bouteille.header.stamp ou rospy.Time.now() si marche pas
+        marker.header.stamp = self.bouteille_pose_transformed.header.stamp #point_bouteille.header.stamp ou rclpy.Time.now() si marche pas
 
         marker.type = 3 # = cylindre
 
