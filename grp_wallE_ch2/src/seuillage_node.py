@@ -84,8 +84,8 @@ class Seuillage(Node):
     def process_img(self):
         self.color=60 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
-        self.lo=np.array([self.color-10, 100, 50])
-        self.hi=np.array([self.color+10, 255,200])
+        self.lo=np.array([self.color-20, 100, 50])
+        self.hi=np.array([self.color+20, 255,255])
 
         self.color_info=(0, 0, 255)
 
