@@ -50,7 +50,7 @@ rosNode.create_subscription( LaserScan, 'scan', scan_callback, 10)
 cloudpublisher = rosNode.create_publisher(PointCloud2, 'cloud', 10)
 
 while True :
-    rclpy.spin_once(rosNode)
+    rclpy.spin_once(rosNode, timeout_sec=0.001)
 
 scanInterpret.destroy_node()
 rclpy.shutdown()
