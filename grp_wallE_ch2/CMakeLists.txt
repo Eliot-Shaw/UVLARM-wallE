@@ -31,7 +31,7 @@ install(DIRECTORY
 ########################################################################################################################################################
 # pythonScripts
 install( PROGRAMS 
-  src/camera_node2.py
+  src/camera_node.py
   src/laser_scan-point_cloud.py
   src/marker_array_node.py
   src/marker_node.py
