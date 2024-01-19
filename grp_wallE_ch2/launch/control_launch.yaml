@@ -6,13 +6,7 @@ launch:
     name: "rviz2"
 
 - executable:
-    cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch2 camera_node.py'
-
-- executable:
-    cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch2 seuillage_node.py'
-
-- executable:
-    cmd: gnome-terminal --tab -e 'ros2 run grp_wallE_ch2 depth_node.py'
+    cmd: gnome-terminal --tab -e "ssh bot@10.100.252.105"
 
 
     
