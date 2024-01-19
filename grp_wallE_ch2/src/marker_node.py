@@ -32,7 +32,6 @@ class MarkerBouteille(Node):
 
         try:
             self.transform_baselink_map = self.tf_buffer.lookup_transform(target_frame='map', source_frame='base_link', time=rclpy.time.Time())
-            bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
         except Exception as e:
             print(f'Error transforming point: {e}')
             return
