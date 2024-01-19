@@ -20,7 +20,8 @@ ACTUELLE todo :
 - Placage bouteille par rapport à bot (recupere distance bouteille, angle par rapp map et map et retourne coordonnées bouteilles carte) ATESTER
 
 - #DEGAGER INFRA RESTANTS
-
+- ssh ordi controle
+- petites portes navigation
 
 
 - on utilise depth_node ?
