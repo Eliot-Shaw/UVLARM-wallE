@@ -28,6 +28,12 @@ install(DIRECTORY
   launch
   DESTINATION share/${PROJECT_NAME}/
 )
+
+# Install img files
+install(DIRECTORY
+  images/
+  DESTINATION lib/${PROJECT_NAME})
+
 ########################################################################################################################################################
 # pythonScripts
 install( PROGRAMS 
@@ -37,10 +43,6 @@ install( PROGRAMS
   src/marker_node.py
   src/navigation_node.py
   src/seuillage_node.py
-  images/shape_btl1.png
-  images/shape_btl2.png
-  images/shape_btl3.png
-  images/shape_btl4.png
   DESTINATION lib/${PROJECT_NAME})
 ########################################################################################################################################################
 
