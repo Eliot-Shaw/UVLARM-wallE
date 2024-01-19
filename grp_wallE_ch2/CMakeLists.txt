@@ -31,7 +31,7 @@ install(DIRECTORY
 
 # Install img files
 install(DIRECTORY
-  images/
+  images
   DESTINATION lib/${PROJECT_NAME})
 
 ########################################################################################################################################################

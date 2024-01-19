@@ -7,6 +7,7 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float32
+import pathlib
 
 message = Point()
 
@@ -18,7 +19,8 @@ class Seuillage(Node):
         self.init_contour_matching()
 
     def init_contour_matching(self):
-        img1 = cv2.imread('shape_btl1.png', cv2.IMREAD_GRAYSCALE)
+        directory = pathlib.PurePath(__file__).parent
+        img1 = cv2.imread(str(directory/"images"/'shape_btl1.png'), cv2.IMREAD_GRAYSCALE)
         img2 = cv2.imread('shape_btl2.png', cv2.IMREAD_GRAYSCALE)
         img3 = cv2.imread('shape_btl3.png', cv2.IMREAD_GRAYSCALE)
         img4 = cv2.imread('shape_btl4.png', cv2.IMREAD_GRAYSCALE)
