@@ -1,23 +1,21 @@
 #!/usr/bin/env python3
 
 import numpy as np
-import cv2, rclpy
+import rclpy
 from rclpy.node import Node
-from cv_bridge import CvBridge
-from sensor_msgs.msg import Image
-from std_msgs.msg import Float32
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Point, Pose
 from visualization_msgs.msg import Marker
 import tf2_ros
 import tf2_geometry_msgs
+import rospy
 
 class Marker_Bouteille(Node):
     def __init__(self, fps= 60):
         super().__init__('marker_bouteille')
         self.marker_bouteille = Marker()
-        tf_buffer = tf2_ros.Buffer(rospy.Duration(100.0))  # tf buffer length
-        tf_listener = tf2_ros.TransformListener(self.tf_buffer)
+        self.tf_buffer = tf2_ros.Buffer(rospy.Duration(100.0))  # tf buffer length
+        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
 
     def marker_bouteille(self, point_bouteille):
         print(f"entrer marker_bouteille")
@@ -31,15 +29,15 @@ class Marker_Bouteille(Node):
         bouteille_pose.orientation.z = 0.0
         bouteille_pose.orientation.w = 0.0
 
-        transform_baselink_map = tf_buffer.lookup_transform("map", "base_link", point_bouteille.header.stamp, rospy.Duration(1.0))
+        self.transform_baselink_map = self.tf_buffer.lookup_transform("map", "base_link", point_bouteille.header.stamp, rospy.Duration(1.0))
                                                                                 #rospy.Time.now() si marche pas
 
-        self.bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, transform_baselink_map)
+        self.bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
 
         marker = Marker()
         
         marker.header.frame_id = "map"
-        marker.header.stamp = bouteille_pose_transformed.header.stamp #point_bouteille.header.stamp ou rospy.Time.now() si marche pas
+        marker.header.stamp = self.bouteille_pose_transformed.header.stamp #point_bouteille.header.stamp ou rospy.Time.now() si marche pas
 
         marker.type = 3 # = cylindre
 
@@ -76,4 +74,4 @@ def main():
 
 if __name__ == '__main__':
 # call main() function
-    main()
+    main()pip install roslibpy
