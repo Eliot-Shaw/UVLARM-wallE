@@ -17,6 +17,7 @@ isOk= True
 class Realsense(Node):
     def __init__(self, fps= 60):
         super().__init__('camera_simu')
+        self.bridge=CvBridge()
 
 
     def start_connexion(self):
@@ -28,7 +29,9 @@ class Realsense(Node):
 
     def read_imgs(self, frames_camera):
         # Wait for a coherent tuple of frames: depth, color and accel
-        aligned_frames = self.align.process(frames_camera, self.depth_recup_frame)
+        frames_cv2_img = self.bridge.imgmsg_to_cv2(frames_camera, "bgr8")
+        frames_cv2_depth = self.bridge.imgmsg_to_cv2(self.depth_recup_frame, "bgr8")
+        aligned_frames = self.align.process(frames_cv2_img, frames_cv2_depth)
         self.depth_frame = aligned_frames.get_depth_frame()
         aligned_color_frame = aligned_frames.get_color_frame()
 
@@ -50,7 +53,6 @@ class Realsense(Node):
         
         
     def publish_imgs(self):
-        self.bridge=CvBridge()
         msg_image = self.bridge.cv2_to_imgmsg(self.color_image,"bgr8")
         msg_image.header.stamp = self.get_clock().now().to_msg()
         msg_image.header.frame_id = "image"
