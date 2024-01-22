@@ -136,8 +136,8 @@ class Seuillage(Node):
 
         self.color=60 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
-        self.lo=np.array([self.color-30, 100, 50])
-        self.hi=np.array([self.color+30, 255,255])
+        self.lo=np.array([self.color-25, 100, 50])
+        self.hi=np.array([self.color+25, 255,255])
 
         self.color_info=(0, 0, 255)
 
