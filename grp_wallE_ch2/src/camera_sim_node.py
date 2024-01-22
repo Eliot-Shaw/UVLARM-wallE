@@ -18,9 +18,16 @@ class Realsense(Node):
     def __init__(self, fps= 60):
         super().__init__('camera_simu')
         self.bridge=CvBridge()
+        self.depth_recup_frame = Image()
 
 
     def start_connexion(self):
+        align_to = rs.stream.depth
+        self.align = rs.align(align_to)
+        self.refTime = time.process_time()
+        self.count= 1
+        self.freq= 60
+
         #Visualisation point depth
         self.color_info = (0,0,255)
         self.rayon = 10
@@ -29,8 +36,8 @@ class Realsense(Node):
 
     def read_imgs(self, frames_camera):
         # Wait for a coherent tuple of frames: depth, color and accel
-        frames_cv2_img = self.bridge.imgmsg_to_cv2(frames_camera, "bgr8")
-        frames_cv2_depth = self.bridge.imgmsg_to_cv2(self.depth_recup_frame, "bgr8")
+        frames_cv2_img = self.bridge.imgmsg_to_cv2(frames_camera, desired_encoding='passthrough')
+        frames_cv2_depth = self.bridge.imgmsg_to_cv2(self.depth_recup_frame, desired_encoding='passthrough')
         aligned_frames = self.align.process(frames_cv2_img, frames_cv2_depth)
         self.depth_frame = aligned_frames.get_depth_frame()
         aligned_color_frame = aligned_frames.get_color_frame()
@@ -46,13 +53,7 @@ class Realsense(Node):
         self.color_intrin = aligned_color_frame.profile.as_video_stream_profile().intrinsics
         self.depth_colormap_dim = self.depth_colormap.shape
         self.color_colormap_dim = self.color_image.shape
-    
-    def depth_img(self, frames_depth):
-        self.depth_recup_frame = frames_depth
 
-        
-        
-    def publish_imgs(self):
         msg_image = self.bridge.cv2_to_imgmsg(self.color_image,"bgr8")
         msg_image.header.stamp = self.get_clock().now().to_msg()
         msg_image.header.frame_id = "image"
@@ -63,6 +64,15 @@ class Realsense(Node):
         msg_depth.header.stamp = msg_image.header.stamp
         msg_depth.header.frame_id = "depth"
         self.image_depth_publisher.publish(msg_depth)
+    
+    def depth_img(self, frames_depth):
+        print(type(frames_depth))
+        self.depth_recup_frame = frames_depth
+
+         
+    def publish_imgs(self):
+        pass
+        
 
 
     def calcul_distance_bouteille(self, coords_bouteille):
@@ -93,9 +103,10 @@ class Realsense(Node):
         self.start_connexion()
         sys.stdout.write("-")
 
-        self.create_subscription(Point, '/coords_img_bouteille', self.calcul_distance_bouteille, 10) 
-        self.create_subscription(Image, '/camera/image_raw', self.read_imgs, 10)
+
         self.create_subscription(Image, '/camera/depth/image_raw', self.depth_img, 10)
+        self.create_subscription(Image, '/camera/image_raw', self.read_imgs, 10)
+        self.create_subscription(Point, '/coords_img_bouteille', self.calcul_distance_bouteille, 10) 
 
         self.image_image_publisher = self.create_publisher(Image, '/image_image', 10)
         self.image_depth_publisher = self.create_publisher(Image, '/image_depth', 10)
@@ -105,15 +116,6 @@ class Realsense(Node):
 
         
         while isOk:
-            self.read_imgs()
-            self.publish_imgs()
-            # Frequency:
-            if self.count == 10 :
-                newTime= time.process_time()
-                self.freq= 10/((newTime-self.refTime))
-                self.refTime= newTime
-                self.count= 0
-            self.count+= 1
             rclpy.spin_once(self, timeout_sec=0.001)
         # Stop streaming
         print("Ending...")
