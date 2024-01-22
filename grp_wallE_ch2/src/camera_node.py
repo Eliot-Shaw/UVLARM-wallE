@@ -102,9 +102,9 @@ class Realsense(Node):
         dx ,dy, dz = rs.rs2_deproject_pixel_to_point(self.color_intrin, [int(coords_bouteille.x),int(coords_bouteille.y)], depth)
         dist.data = math.sqrt(((dx)**2) + ((dy)**2) + ((dz)**2))
 
-        point_bouteille.x = dx
-        point_bouteille.z = dy
-        point_bouteille.z = dz
+        point_bouteille.x = dz
+        point_bouteille.y = -dx
+        #point_bouteille.z = dz
         if dist.data > 0.15: #éviter les 0 quand le robot va trop vite
             self.dist_publisher.publish(dist)
             self.publisher_point_bouteille.publish(point_bouteille)

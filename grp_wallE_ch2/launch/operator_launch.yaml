@@ -6,7 +6,7 @@ launch:
     name: "rviz2"
 
 - executable:
-    cmd: gnome-terminal --tab -e "ssh bot@10.100.252.105"
+    cmd: gnome-terminal --tab -e "ssh bot@10.89.2.42"
 
 
     

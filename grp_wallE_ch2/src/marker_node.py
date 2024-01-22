@@ -22,24 +22,16 @@ class MarkerBouteille(Node):
         print(f"entrer create_marker_bouteille")
         bouteille_pose = Pose()
         bouteille_pose.position.x = point_bouteille.x
-        bouteille_pose.position.y = point_bouteille.z
-        bouteille_pose.position.z = point_bouteille.y
+        bouteille_pose.position.y = point_bouteille.y
+        #bouteille_pose.position.z = point_bouteille.y
         
         bouteille_pose.orientation.x = 0.0  # À remplir
         bouteille_pose.orientation.y = 0.0
         bouteille_pose.orientation.z = 0.0
         bouteille_pose.orientation.w = 0.0
 
-        # try:
-        #     self.transform_baselink_map = self.tf_buffer.lookup_transform(target_frame='map', source_frame='odom', time=rclpy.time.Time())
-        # except Exception as e:
-        #     print(f'Error transforming point: {e}')
-        #     return
-        # try:
-        #     bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
-        # except Exception as e:
-        #     print(f'Error transforming point n°2: {e}')
-        #     return
+        self.transform_baselink_map = self.tf_buffer.lookup_transform(target_frame='map', source_frame='base_link', time=rclpy.time.Time())
+        bouteille_pose_transformed = tf2_geometry_msgs.do_transform_pose(bouteille_pose, self.transform_baselink_map)
 
 
         marker = Marker()
@@ -47,6 +39,9 @@ class MarkerBouteille(Node):
         marker.header.stamp = self.get_clock().now().to_msg()
 
         marker.type = 3  # cylindre
+
+        marker.frame_locked = False
+
 
         # Taille 
         marker.scale.x = 0.1
@@ -60,7 +55,7 @@ class MarkerBouteille(Node):
         marker.color.a = 1.0  # Alpha (transparence)
 
         # Set the pose of the marker based on the transformed pose
-        marker.pose = bouteille_pose
+        marker.pose = bouteille_pose_transformed
         
 # VERIFIER PK MARKER PAS COMPLET ?
         self.publisher_marker_bouteille.publish(marker)

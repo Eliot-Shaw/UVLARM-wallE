@@ -13,6 +13,7 @@ class CloudToDecision(Node):
     def __init__(self):
         super().__init__('decider_direction')
         self.ordre_date_executive = None
+        self.panik = None
 
     def cloud_callback(self, nuage): #fonction de décision
         #bornes de détections absolues en mètres
@@ -34,25 +35,50 @@ class CloudToDecision(Node):
             velo.linear.x= 0.3   # meter per second
             velo.angular.z= 0.0 # radian per second
             self.publisher_.publish(velo)
+            self.panik = None
         else:
             if pointObstacle[0] < 0.3:
-                print("Obstacle trop proche !! Arrêt puis changement de direction")
-                velo = Twist()
-                velo.linear.x= 0.0   # meter per second
-                velo.angular.z= 0.5 # radian per second
-                self.publisher_.publish(velo)
+                if self.panik is None:
+                    if pointObstacle[1]<0:
+                        print("Obstacle trop proche !! Arrêt puis on tourne à droite")
+                        self.panik = "droite"
+                        velo = Twist()
+                        velo.linear.x= 0.0   # meter per second
+                        velo.angular.z= 0.5 # radian per second
+                        self.publisher_.publish(velo)
+                    else:
+                        print("Obstacle trop proche !! Arrêt puis on tourne à gauche")
+                        self.panik = "gauche"
+                        velo = Twist()
+                        velo.linear.x= 0.0   # meter per second
+                        velo.angular.z= -0.5 # radian per second
+                        self.publisher_.publish(velo)
+                else: 
+                    if self.panik == "droite":
+                        print("Obstacle trop proche !! On continue à tourner à droite")
+                        velo = Twist()
+                        velo.linear.x= 0.0   # meter per second
+                        velo.angular.z= 0.5 # radian per second
+                        self.publisher_.publish(velo)
+                    else:
+                        print("Obstacle trop proche !! On continue à tourner à gauche")
+                        velo = Twist()
+                        velo.linear.x= 0.0   # meter per second
+                        velo.angular.z= -0.5 # radian per second
+                        self.publisher_.publish(velo)
             else:
+                self.panik = None
                 if pointObstacle[1]<0:
                     print("Obstacle distant à gauche: on tourne à droite")
                     velo = Twist()
                     velo.linear.x= 0.3  # meter per second
-                    velo.angular.z= 1.5 # radian per second
+                    velo.angular.z= 1.0 # radian per second
                     self.publisher_.publish(velo)
                 else:
                     print("Obstacle distant à droite: on tourne à gauche")
                     velo = Twist()
                     velo.linear.x= 0.3   # meter per second
-                    velo.angular.z= -1.5 # radian per second
+                    velo.angular.z= -1.0 # radian per second
                     self.publisher_.publish(velo)
 
             

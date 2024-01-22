@@ -134,10 +134,10 @@ class Seuillage(Node):
         self.create_subscription(Image, '/image_image', self.seuillage, 10)
         self.create_subscription(Float32, '/distance_bouteille', self.printer, 10) 
 
-        self.color=60 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
+        self.color=80 # HSV : detecter H = 60 (vert vert) pour webcam ; 80 pour realsense
 
-        self.lo=np.array([self.color-25, 100, 50])
-        self.hi=np.array([self.color+25, 255,255])
+        self.lo=np.array([self.color-30, 100, 50])
+        self.hi=np.array([self.color+30, 255,255])
 
         self.color_info=(0, 0, 255)
 
