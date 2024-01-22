@@ -16,7 +16,7 @@ class Marker_Array(Node):
         print(f"entrer marker_array")
         added = False
         # Iterate through existing markers in the array
-        for existing_marker in self.marker_array:
+        for existing_marker in self.marker_array.markers:
             # Calculate the distance between marker_bouteille and existing_marker
             distance = self.distance_pose(marker_bouteille.pose, existing_marker.pose)
 
