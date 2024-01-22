@@ -23,6 +23,9 @@ ACTUELLE todo :
 - ssh ordi controle
 - petites portes navigation
 
+# VERIFIER PK MARKER PAS COMPLET ? MARKER NODE LIGNE 65
+
+
 
 TODO CHALLENGE 2:
 - faire un launch file pour la simu
