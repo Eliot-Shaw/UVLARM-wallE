@@ -34,14 +34,39 @@ class CloudToDecision(Node):
             velo.linear.x= 0.3   # meter per second
             velo.angular.z= 0.0 # radian per second
             self.publisher_.publish(velo)
+            panik = None
         else:
             if pointObstacle[0] < 0.3:
-                print("Obstacle trop proche !! Arrêt puis changement de direction")
-                velo = Twist()
-                velo.linear.x= 0.0   # meter per second
-                velo.angular.z= 0.5 # radian per second
-                self.publisher_.publish(velo)
+                if panik is None:
+                    if pointObstacle[1]<0:
+                        print("Obstacle trop proche !! Arrêt puis on tourne à droite")
+                        panik = "droite"
+                        velo = Twist()
+                        velo.linear.x= 0.0   # meter per second
+                        velo.angular.z= 0.5 # radian per second
+                        self.publisher_.publish(velo)
+                    else:
+                        print("Obstacle trop proche !! Arrêt puis on tourne à gauche")
+                        panik = "gauche"
+                        velo = Twist()
+                        velo.linear.x= 0.0   # meter per second
+                        velo.angular.z= -0.5 # radian per second
+                        self.publisher_.publish(velo)
+                else: 
+                    if panik == "droite":
+                        print("Obstacle trop proche !! On continue à tourner à droite")
+                        velo = Twist()
+                        velo.linear.x= 0.0   # meter per second
+                        velo.angular.z= 0.5 # radian per second
+                        self.publisher_.publish(velo)
+                    else:
+                        print("Obstacle trop proche !! On continue à tourner à gauche")
+                        velo = Twist()
+                        velo.linear.x= 0.0   # meter per second
+                        velo.angular.z= -0.5 # radian per second
+                        self.publisher_.publish(velo)
             else:
+                panik = None
                 if pointObstacle[1]<0:
                     print("Obstacle distant à gauche: on tourne à droite")
                     velo = Twist()
