@@ -48,6 +48,9 @@ class MarkerBouteille(Node):
 
         marker.type = 3  # cylindre
 
+        marker.frame_locked = False
+
+
         # Taille 
         marker.scale.x = 0.1
         marker.scale.y = 0.1
