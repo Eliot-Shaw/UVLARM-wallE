@@ -48,8 +48,8 @@ class MarkerBouteille(Node):
 
         marker.type = 3  # cylindre
 
-        #marker.action = 0 # 0 = add/modify, 1 = (deprecated), 2 = delete, 3 = deleteall
-        marker.action = Marker.ADD # 0 = add/modify, 1 = (deprecated), 2 = delete, 3 = deleteall
+        marker.action = 0 # 0 = add/modify, 1 = (deprecated), 2 = delete, 3 = deleteall
+        #marker.action = Marker.ADD # 0 = add/modify, 1 = (deprecated), 2 = delete, 3 = deleteall
 
         marker.ns = "bouteilles" # un namespace pour les bouteilles
         marker.id = random.randint(1,999999999) # un marker id random
