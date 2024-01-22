@@ -21,14 +21,16 @@ class Marker_Array(Node):
             distance = self.distance_pose(marker_bouteille.pose, existing_marker.pose)
 
             # If the distance is less than 0.1, update the marker's position to the average
-            if distance < 0.1:
+            if distance < 0.25:
                 existing_marker.pose = self.moyenne_pose(marker_bouteille.pose, existing_marker.pose)
                 print(f"Updated marker position based on average distance: {existing_marker.pose}")
                 added = True
                 break
 
         if not added:
+            marker_bouteille.id = len(self.marker_array.markers)
             self.marker_array.markers.append(marker_bouteille)
+
             print(f"Added a new marker to the array: {marker_bouteille}")
 
         # Publish the updated MarkerArray
@@ -36,14 +38,14 @@ class Marker_Array(Node):
         print(f"Publish marker array ------------ {self.marker_array}")
 
 
-    def distance_pose(pose1, pose2):
+    def distance_pose(self, pose1, pose2):
         x1, y1, z1 = pose1.position.x, pose1.position.y, pose1.position.z
         x2, y2, z2 = pose2.position.x, pose2.position.y, pose2.position.z
         distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
         return distance
 
 
-    def moyenne_pose(pose1, pose2):
+    def moyenne_pose(self, pose1, pose2):
         x1, y1, z1 = pose1.position.x, pose1.position.y, pose1.position.z
         x2, y2, z2 = pose2.position.x, pose2.position.y, pose2.position.z
 
