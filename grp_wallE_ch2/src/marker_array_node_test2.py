@@ -62,7 +62,7 @@ class Marker_Array(Node):
             rclpy.spin_once(self, timeout_sec=0.001)
 
 def main():
-    print("marker_array_node")
+    print("marker_array_node_test2")
     rclpy.init()
     minimal_subscriber = Marker_Array()
     print("initialisation : ok")
