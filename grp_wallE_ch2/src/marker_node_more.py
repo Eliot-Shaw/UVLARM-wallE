@@ -67,6 +67,8 @@ class MarkerBouteille(Node):
 
         # Set the pose of the marker based on the transformed pose
         marker.pose = bouteille_pose
+
+        marker.lifetime = 0 # forever
         
 # VERIFIER PK MARKER PAS COMPLET ?
         self.publisher_marker_bouteille.publish(marker)
