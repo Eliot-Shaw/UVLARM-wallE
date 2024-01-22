@@ -28,4 +28,5 @@ ACTUELLE todo :
 
 
 TODO CHALLENGE 2:
-- faire un launch file pour la simu
+- faire un launch file pour la simu (simulation_launch)
+- 
