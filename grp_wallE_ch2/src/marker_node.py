@@ -22,8 +22,8 @@ class MarkerBouteille(Node):
         print(f"entrer create_marker_bouteille")
         bouteille_pose = Pose()
         bouteille_pose.position.x = point_bouteille.x
-        bouteille_pose.position.y = point_bouteille.y
-        bouteille_pose.position.z = point_bouteille.z
+        bouteille_pose.position.y = point_bouteille.z
+        bouteille_pose.position.z = point_bouteille.y
         
         bouteille_pose.orientation.x = 0.0  # À remplir
         bouteille_pose.orientation.y = 0.0

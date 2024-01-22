@@ -80,7 +80,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /marker_array_bouteille
+        Value: /marker_bouteille
       Value: true
     - Class: rviz_default_plugins/TF
       Enabled: true
