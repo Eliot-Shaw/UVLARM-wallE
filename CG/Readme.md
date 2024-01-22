@@ -26,6 +26,7 @@ ACTUELLE todo :
 # VERIFIER PK MARKER PAS COMPLET ? MARKER NODE LIGNE 65
 --> le topic s'est pas créé
 --> le fichier crash dès la détection de bouteilles car core dumped
+C4ETAIT LE TIME ARTHUR JE T4AIME
 
 
 

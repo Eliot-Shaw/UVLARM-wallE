@@ -21,9 +21,9 @@ class MarkerBouteille(Node):
     def create_marker_bouteille(self, point_bouteille):
         print(f"entrer create_marker_bouteille")
         bouteille_pose = Pose()
-        bouteille_pose.position.x = float(point_bouteille.x)
-        bouteille_pose.position.y = float(point_bouteille.y)
-        bouteille_pose.position.z = float(point_bouteille.z)
+        bouteille_pose.position.x = point_bouteille.x
+        bouteille_pose.position.y = point_bouteille.y
+        bouteille_pose.position.z = point_bouteille.z
         
         bouteille_pose.orientation.x = 0.0  # À remplir
         bouteille_pose.orientation.y = 0.0
@@ -44,7 +44,7 @@ class MarkerBouteille(Node):
 
         marker = Marker()
         marker.header.frame_id = "map"
-        marker.header.stamp = rclpy.time.Time()
+        marker.header.stamp = self.get_clock().now().to_msg()
 
         marker.type = 3  # cylindre
 
