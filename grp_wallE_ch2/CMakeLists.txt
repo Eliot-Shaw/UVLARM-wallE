@@ -43,6 +43,8 @@ install( PROGRAMS
   src/marker_node.py
   src/navigation_node.py
   src/seuillage_node.py
+  src/camera_sim_node.py
+  src/navigation_simu_node.py
   DESTINATION lib/${PROJECT_NAME})
 ########################################################################################################################################################
 
