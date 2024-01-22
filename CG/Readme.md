@@ -11,7 +11,7 @@ ACTUELLE todo :
 - affiner detection bouteille :
         - hsv
         - forme
-        - plusieurs bouteilles détectées en même temps
+        - plusieurs bouteilles détectées en même temps : FAIT
 
 - Map en ligne de cmd dans le launch : FAIT
 - Img depth en node (recupere centre zone verte et retourne la distance de ce pixel): FAIT
@@ -22,3 +22,7 @@ ACTUELLE todo :
 - #DEGAGER INFRA RESTANTS
 - ssh ordi controle
 - petites portes navigation
+
+
+TODO CHALLENGE 2:
+- faire un launch file pour la simu
